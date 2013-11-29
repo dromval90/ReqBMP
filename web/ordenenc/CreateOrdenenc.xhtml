@@ -94,6 +94,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
+                        
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{detordenController.prepareCreate}"  oncomplete="DetordenCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" oncomplete="DetordenViewDialog.show()" disabled="#{empty detordenController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}"  oncomplete="DetordenEditDialog.show()" disabled="#{empty detordenController.selected}"/>
