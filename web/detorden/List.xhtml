@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DetordenListForm">
+
+        <p:panel header="#{myBundle.ListDetordenTitle}">
+
+            <p:dataTable id="datalist" value="#{detordenController.items}" var="item"
+                         selectionMode="single" selection="#{detordenController.selected}"
+                         rowKey="#{item.detordenPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.detordenPK.codProd}" filterBy="#{item.detordenPK.codProd}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_detordenPK_codProd}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.detordenPK.codProd}"/>
+                </p:column>
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
+                <p:column sortBy="#{item.codigoUnidad}" filterBy="#{item.codigoUnidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_codigoUnidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigoUnidad}"/>
+                </p:column>
+                <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+                <p:column sortBy="#{item.preciouni}" filterBy="#{item.preciouni}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_preciouni}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.preciouni}"/>
+                </p:column>
+                <p:column sortBy="#{item.valorreq}" filterBy="#{item.valorreq}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_valorreq}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.valorreq}"/>
+                </p:column>
+                <p:column sortBy="#{item.fecharequerido}" filterBy="#{item.fecharequerido}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_fecharequerido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fecharequerido}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.fecharecibido}" filterBy="#{item.fecharecibido}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_fecharecibido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fecharecibido}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.recibido}" filterBy="#{item.recibido}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_recibido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.recibido}"/>
+                </p:column>
+                <p:column sortBy="#{item.cantidadRec}" filterBy="#{item.cantidadRec}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_cantidadRec}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidadRec}"/>
+                </p:column>
+                <p:column sortBy="#{item.calidad}" filterBy="#{item.calidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_calidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.calidad}"/>
+                </p:column>
+                <p:column sortBy="#{item.cantCal}" filterBy="#{item.cantCal}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_cantCal}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantCal}"/>
+                </p:column>
+                <p:column sortBy="#{item.fechaPromesa}" filterBy="#{item.fechaPromesa}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_fechaPromesa}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaPromesa}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.fechaSurtido}" filterBy="#{item.fechaSurtido}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_fechaSurtido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaSurtido}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.cantSurtida}" filterBy="#{item.cantSurtida}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_cantSurtida}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantSurtida}"/>
+                </p:column>
+                <p:column sortBy="#{item.ordenenc.ordenencPK}" filterBy="#{item.ordenenc.ordenencPK}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_ordenenc}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ordenenc.ordenencPK}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{detordenController.prepareCreate}" update=":DetordenCreateForm" oncomplete="DetordenCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":DetordenViewForm" oncomplete="DetordenViewDialog.show()" disabled="#{empty detordenController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":DetordenEditForm" oncomplete="DetordenEditDialog.show()" disabled="#{empty detordenController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{detordenController.delete}" update=":growl,datalist" disabled="#{empty detordenController.selected}"/>
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetordenViewDlg" widgetVar="DetordenViewDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.ViewDetordenTitle}" closeOnEscape="true">
+
+            <h:form id="DetordenViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detordenController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_detordenPK_codProd}"/>
+                        <h:outputText value="#{detordenController.selected.detordenPK.codProd}" title="#{myBundle.ViewDetordenTitle_detordenPK_codProd}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_nombre}"/>
+                        <h:outputText value="#{detordenController.selected.nombre}" title="#{myBundle.ViewDetordenTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_codigoUnidad}"/>
+                        <h:outputText value="#{detordenController.selected.codigoUnidad}" title="#{myBundle.ViewDetordenTitle_codigoUnidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_cantidad}"/>
+                        <h:outputText value="#{detordenController.selected.cantidad}" title="#{myBundle.ViewDetordenTitle_cantidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_preciouni}"/>
+                        <h:outputText value="#{detordenController.selected.preciouni}" title="#{myBundle.ViewDetordenTitle_preciouni}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_valorreq}"/>
+                        <h:outputText value="#{detordenController.selected.valorreq}" title="#{myBundle.ViewDetordenTitle_valorreq}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_fecharequerido}"/>
+                        <h:outputText value="#{detordenController.selected.fecharequerido}" title="#{myBundle.ViewDetordenTitle_fecharequerido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_fecharecibido}"/>
+                        <h:outputText value="#{detordenController.selected.fecharecibido}" title="#{myBundle.ViewDetordenTitle_fecharecibido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_recibido}"/>
+                        <h:outputText value="#{detordenController.selected.recibido}" title="#{myBundle.ViewDetordenTitle_recibido}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_cantidadRec}"/>
+                        <h:outputText value="#{detordenController.selected.cantidadRec}" title="#{myBundle.ViewDetordenTitle_cantidadRec}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_calidad}"/>
+                        <h:outputText value="#{detordenController.selected.calidad}" title="#{myBundle.ViewDetordenTitle_calidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_cantCal}"/>
+                        <h:outputText value="#{detordenController.selected.cantCal}" title="#{myBundle.ViewDetordenTitle_cantCal}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_fechaPromesa}"/>
+                        <h:outputText value="#{detordenController.selected.fechaPromesa}" title="#{myBundle.ViewDetordenTitle_fechaPromesa}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_fechaSurtido}"/>
+                        <h:outputText value="#{detordenController.selected.fechaSurtido}" title="#{myBundle.ViewDetordenTitle_fechaSurtido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_cantSurtida}"/>
+                        <h:outputText value="#{detordenController.selected.cantSurtida}" title="#{myBundle.ViewDetordenTitle_cantSurtida}"/>
+
+                        <h:outputText value="#{myBundle.ViewDetordenLabel_ordenenc}"/>
+                        <h:outputText value="#{detordenController.selected.ordenenc.ordenencPK}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="DetordenViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

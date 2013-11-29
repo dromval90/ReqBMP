@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetordenEditDlg" widgetVar="DetordenEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditDetordenTitle}" closeOnEscape="true">
+
+            <h:form id="DetordenEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{detordenController.selected != null}">
+
+                        <h:outputLabel value="#{myBundle.EditDetordenLabel_detordenPK_codProd}" for="detordenPK_codProd" />
+                        <h:outputText id="detordenPK_codProd" value="#{detordenController.selected.detordenPK.codProd}" />
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{detordenController.selected.nombre}" title="#{myBundle.EditDetordenTitle_nombre}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_codigoUnidad}" for="codigoUnidad" />
+                        <p:inputText id="codigoUnidad" value="#{detordenController.selected.codigoUnidad}" title="#{myBundle.EditDetordenTitle_codigoUnidad}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{detordenController.selected.cantidad}" title="#{myBundle.EditDetordenTitle_cantidad}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_preciouni}" for="preciouni" />
+                        <p:inputText id="preciouni" value="#{detordenController.selected.preciouni}" title="#{myBundle.EditDetordenTitle_preciouni}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_valorreq}" for="valorreq" />
+                        <p:inputText id="valorreq" value="#{detordenController.selected.valorreq}" title="#{myBundle.EditDetordenTitle_valorreq}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_fecharequerido}" for="fecharequerido" />
+                        <p:calendar id="fecharequerido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fecharequerido}" title="#{myBundle.EditDetordenTitle_fecharequerido}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_fecharecibido}" for="fecharecibido" />
+                        <p:calendar id="fecharecibido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fecharecibido}" title="#{myBundle.EditDetordenTitle_fecharecibido}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_recibido}" for="recibido" />
+                        <p:inputText id="recibido" value="#{detordenController.selected.recibido}" title="#{myBundle.EditDetordenTitle_recibido}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_cantidadRec}" for="cantidadRec" />
+                        <p:inputText id="cantidadRec" value="#{detordenController.selected.cantidadRec}" title="#{myBundle.EditDetordenTitle_cantidadRec}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_calidad}" for="calidad" />
+                        <p:inputText id="calidad" value="#{detordenController.selected.calidad}" title="#{myBundle.EditDetordenTitle_calidad}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_cantCal}" for="cantCal" />
+                        <p:inputText id="cantCal" value="#{detordenController.selected.cantCal}" title="#{myBundle.EditDetordenTitle_cantCal}"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_fechaPromesa}" for="fechaPromesa" />
+                        <p:calendar id="fechaPromesa" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fechaPromesa}" title="#{myBundle.EditDetordenTitle_fechaPromesa}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_fechaSurtido}" for="fechaSurtido" />
+                        <p:calendar id="fechaSurtido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fechaSurtido}" title="#{myBundle.EditDetordenTitle_fechaSurtido}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditDetordenLabel_cantSurtida}" for="cantSurtida" />
+                        <p:inputText id="cantSurtida" value="#{detordenController.selected.cantSurtida}" title="#{myBundle.EditDetordenTitle_cantSurtida}"/>
+
+                        <h:outputLabel value="#{myBundle.EditDetordenLabel_ordenenc}" for="ordenenc" />
+                        <h:outputText id="ordenenc" value="#{detordenController.selected.ordenenc}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detordenController.save}" value="#{myBundle.Save}" update="display,:DetordenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="DetordenEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

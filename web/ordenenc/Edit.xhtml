@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenencEditDlg" widgetVar="OrdenencEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditOrdenencTitle}" closeOnEscape="true">
+
+            <h:form id="OrdenencEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{ordenencController.selected != null}">
+
+                        <h:outputLabel value="#{myBundle.EditOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
+                        <h:outputText id="ordenencPK_numOrden" value="#{ordenencController.selected.ordenencPK.numOrden}" />
+
+                        <h:outputLabel value="#{myBundle.EditOrdenencLabel_ordenencPK_codCia}" for="ordenencPK_codCia" />
+                        <h:outputText id="ordenencPK_codCia" value="#{ordenencController.selected.ordenencPK.codCia}" />
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_fechaOrden}" for="fechaOrden" />
+                        <p:calendar id="fechaOrden" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.fechaOrden}" title="#{myBundle.EditOrdenencTitle_fechaOrden}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_codigoGrupo}" for="codigoGrupo" />
+                        <p:inputText id="codigoGrupo" value="#{ordenencController.selected.codigoGrupo}" title="#{myBundle.EditOrdenencTitle_codigoGrupo}" required="true" requiredMessage="#{myBundle.EditOrdenencRequiredMessage_codigoGrupo}" size="2" maxlength="2"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_codEmp}" for="codEmp" />
+                        <p:inputText id="codEmp" value="#{ordenencController.selected.codEmp}" title="#{myBundle.EditOrdenencTitle_codEmp}" required="true" requiredMessage="#{myBundle.EditOrdenencRequiredMessage_codEmp}"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_solicitante}" for="solicitante" />
+                        <p:inputText id="solicitante" value="#{ordenencController.selected.solicitante}" title="#{myBundle.EditOrdenencTitle_solicitante}" required="true" requiredMessage="#{myBundle.EditOrdenencRequiredMessage_solicitante}"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_numPedido}" for="numPedido" />
+                        <p:inputText id="numPedido" value="#{ordenencController.selected.numPedido}" title="#{myBundle.EditOrdenencTitle_numPedido}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_codProv}" for="codProv" />
+                        <p:inputText id="codProv" value="#{ordenencController.selected.codProv}" title="#{myBundle.EditOrdenencTitle_codProv}" required="true" requiredMessage="#{myBundle.EditOrdenencRequiredMessage_codProv}" size="15" maxlength="15"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_formaPago}" for="formaPago" />
+                        <p:inputText id="formaPago" value="#{ordenencController.selected.formaPago}" title="#{myBundle.EditOrdenencTitle_formaPago}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_via}" for="via" />
+                        <p:inputText id="via" value="#{ordenencController.selected.via}" title="#{myBundle.EditOrdenencTitle_via}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_numDias}" for="numDias" />
+                        <p:inputText id="numDias" value="#{ordenencController.selected.numDias}" title="#{myBundle.EditOrdenencTitle_numDias}"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{ordenencController.selected.observaciones}" title="#{myBundle.EditOrdenencTitle_observaciones}" size="150" maxlength="150"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_proyecto}" for="proyecto" />
+                        <p:inputText id="proyecto" value="#{ordenencController.selected.proyecto}" title="#{myBundle.EditOrdenencTitle_proyecto}" required="true" requiredMessage="#{myBundle.EditOrdenencRequiredMessage_proyecto}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{ordenencController.selected.status}" title="#{myBundle.EditOrdenencTitle_status}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_autorizado}" for="autorizado" />
+                        <p:inputText id="autorizado" value="#{ordenencController.selected.autorizado}" title="#{myBundle.EditOrdenencTitle_autorizado}" size="150" maxlength="150"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_fechautorizado}" for="fechautorizado" />
+                        <p:calendar id="fechautorizado" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.fechautorizado}" title="#{myBundle.EditOrdenencTitle_fechautorizado}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_atendio}" for="atendio" />
+                        <p:inputText id="atendio" value="#{ordenencController.selected.atendio}" title="#{myBundle.EditOrdenencTitle_atendio}" size="30" maxlength="30"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_anulado}" for="anulado" />
+                        <p:inputText id="anulado" value="#{ordenencController.selected.anulado}" title="#{myBundle.EditOrdenencTitle_anulado}" size="15" maxlength="15"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_fechaanulado}" for="fechaanulado" />
+                        <p:calendar id="fechaanulado" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.fechaanulado}" title="#{myBundle.EditOrdenencTitle_fechaanulado}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_numReq}" for="numReq" />
+                        <p:inputText id="numReq" value="#{ordenencController.selected.numReq}" title="#{myBundle.EditOrdenencTitle_numReq}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{ordenencController.selected.anio}" title="#{myBundle.EditOrdenencTitle_anio}"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_coddeptoSol}" for="coddeptoSol" />
+                        <p:inputText id="coddeptoSol" value="#{ordenencController.selected.coddeptoSol}" title="#{myBundle.EditOrdenencTitle_coddeptoSol}"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_usuario}" for="usuario" />
+                        <p:inputText id="usuario" value="#{ordenencController.selected.usuario}" title="#{myBundle.EditOrdenencTitle_usuario}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_fechaIng}" for="fechaIng" />
+                        <p:calendar id="fechaIng" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.fechaIng}" title="#{myBundle.EditOrdenencTitle_fechaIng}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_autorizada}" for="autorizada" />
+                        <p:inputText id="autorizada" value="#{ordenencController.selected.autorizada}" title="#{myBundle.EditOrdenencTitle_autorizada}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_codCat}" for="codCat" />
+                        <p:inputText id="codCat" value="#{ordenencController.selected.codCat}" title="#{myBundle.EditOrdenencTitle_codCat}" size="3" maxlength="3"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_tipoOrden}" for="tipoOrden" />
+                        <p:inputText id="tipoOrden" value="#{ordenencController.selected.tipoOrden}" title="#{myBundle.EditOrdenencTitle_tipoOrden}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_zapateria}" for="zapateria" />
+                        <p:inputText id="zapateria" value="#{ordenencController.selected.zapateria}" title="#{myBundle.EditOrdenencTitle_zapateria}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_planta}" for="planta" />
+                        <p:inputText id="planta" value="#{ordenencController.selected.planta}" title="#{myBundle.EditOrdenencTitle_planta}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_createdAt}" for="createdAt" />
+                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.createdAt}" title="#{myBundle.EditOrdenencTitle_createdAt}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditOrdenencLabel_updatedAt}" for="updatedAt" />
+                        <p:calendar id="updatedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.updatedAt}" title="#{myBundle.EditOrdenencTitle_updatedAt}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenencController.save}" value="#{myBundle.Save}" update="display,:OrdenencListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OrdenencEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="OrdenencEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

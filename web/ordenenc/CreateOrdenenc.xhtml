@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+     <h:form id="OrdenencCreateForm">
+
+         <h:panelGroup id="display">
+                    <p:panelGrid columns="4">
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_tipoOrden}" for="tipoOrden" />
+                        <p:selectOneMenu id="tipoOrden" value="#{tipoOrden.string}">  
+                            <f:selectItem itemLabel="Requisicion BMP" itemValue="P" />  
+                        </p:selectOneMenu>  
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codProv}" for="codProv" />
+                        <p:inputText id="codProv" value="569" title="#{myBundle.CreateOrdenencTitle_codProv}" required="true" readonly="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_codProv}" size="15" maxlength="15"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codigoGrupo}" for="codigoGrupo" />
+                        <p:inputText id="codigoGrupo" value="2" title="#{myBundle.CreateOrdenencTitle_codigoGrupo}" required="true" readonly="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_codigoGrupo}" size="2" maxlength="2"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codCat}" for="codCat" />
+                        <p:inputText id="codCat" value="#{ordenencController.selected.codCat}" title="#{myBundle.CreateOrdenencTitle_codCat}" size="3" maxlength="3"/>
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
+                        <p:inputText id="ordenencPK_numOrden" value="#{ordenencController.selected.ordenencPK.numOrden}" title="#{myBundle.CreateOrdenencTitle_ordenencPK_numOrden}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_ordenencPK_numOrden}" size="10" maxlength="10"/>
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_fechaOrden}" for="fechaOrden" />
+                        <p:calendar id="fechaOrden" pattern="dd/MM/yyyy" value="#{ordenencController.selected.fechaOrden}" title="#{myBundle.EditOrdenencTitle_fechaOrden}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_fechaIng}" for="fechaIng" />
+                        <p:calendar id="fechaIng" pattern="dd/MM/yyyy" value="#{ordenencController.selected.fechaIng}" title="#{myBundle.EditOrdenencTitle_fechaIng}"  showOn="button"/>
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_observaciones}" for="observaciones" />
+                        <p:inputTextarea id="observaciones" rows="6" cols="33" maxlength="150" title="#{myBundle.CreateOrdenencTitle_observaciones}" value="#{ordenencController.selected.observaciones}"/> 
+                        
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codEmp}" for="codEmp" />
+                      
+                        <p:selectOneMenu  filter="true" id="codEmp" value="#{ordenencController.selected.empleados}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_codEmp}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadosController.activos}"
+                                           var="empleadosItem"					   
+                                           itemValue="#{empleadosItem}"
+                                           itemLabel="#{empleadosItem.nombreNit}"
+					   />
+                            <f:converter binding="#{empleadosConverter}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_solicitante}" for="solicitante" />
+                       
+                        <p:selectOneMenu  filter="true" id="solicitante" value="#{ordenencController.selected.empleados2}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_solicitante}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadosController.activos}"
+                                           var="empleadosItem"					   
+                                           itemValue="#{empleadosItem}"
+                                           itemLabel="#{empleadosItem.nombreNit}"
+					   />
+                            <f:converter binding="#{empleadosConverter}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_coddeptoSol}" for="coddeptoSol" />
+                       
+                        <p:selectOneMenu  filter="true" id="coddeptoSol" value="#{ordenencController.selected.departamentos}" required="true" requiredMessage="#{myBundle.CreateOrdenencTitle_coddeptoSol}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentosController.items}"
+                                           var="departamentosItem"					   
+                                           itemValue="#{departamentosItem}"
+                                           itemLabel="#{departamentosItem.nomDepto.toString()}"/>
+                            <f:converter binding="#{departamentosConverter}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_proyecto}" for="proyecto" />
+                        <p:inputText id="proyecto" value="#{ordenencController.selected.proyecto}" title="#{myBundle.CreateOrdenencTitle_proyecto}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_proyecto}" size="20" maxlength="20"/>
+
+                       
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_formaPago}" for="formaPago" />
+                        <p:inputText id="formaPago" value="R" title="#{myBundle.CreateOrdenencTitle_formaPago}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_via}" for="via" />
+                        <p:inputText id="via" value="L" title="#{myBundle.CreateOrdenencTitle_via}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_numDias}" for="numDias" />
+                        <p:inputText id="numDias" value="30" title="#{myBundle.CreateOrdenencTitle_numDias}"/>
+
+            
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{ordenencController.selected.status}" title="#{myBundle.CreateOrdenencTitle_status}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_usuario}" for="usuario" />
+                        <p:inputText id="usuario" value="#{ordenencController.selected.usuario}" title="#{myBundle.CreateOrdenencTitle_usuario}" size="20" maxlength="20"/>
+
+                       
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_autorizada}" for="autorizada" />
+                        <p:inputText id="autorizada" value="N" title="#{myBundle.CreateOrdenencTitle_autorizada}" size="1" maxlength="1"/>
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_zapateria}" for="zapateria" />
+                        <p:inputText id="zapateria" value="S" title="#{myBundle.CreateOrdenencTitle_zapateria}" size="1" maxlength="1"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_planta}" for="planta" />
+                        <p:inputText id="planta" value="N" title="#{myBundle.CreateOrdenencTitle_planta}" size="1" maxlength="1"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+
+            </h:form>
+
+</ui:composition>
