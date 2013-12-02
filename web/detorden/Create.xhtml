@@ -15,61 +15,30 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2">
 
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_detordenPK_codProd}" for="detordenPK_codProd" />
-                        <p:inputText id="detordenPK_codProd" value="#{detordenController.selected.detordenPK.codProd}" title="#{myBundle.CreateDetordenTitle_detordenPK_codProd}" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_codProd}" size="15" maxlength="15"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{detordenController.selected.nombre}" title="#{myBundle.CreateDetordenTitle_nombre}" size="200" maxlength="200"/>
-
+                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_detordenPK_codProd}" for="detordenPK_codProd" />
+                                               
+                        <p:selectOneMenu filter="true" id="detordenPK_codProd" value="#{detordenController.selected.productos}" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_codProd}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productosController.items}"
+                                           var="productosItem"                                        
+                                           itemValue="#{productosItem}"
+                                           itemLabel="#{productosItem.nombre}"/>
+                            <f:converter binding="#{productosConverter}"/>
+                        </p:selectOneMenu>
+                            
                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_codigoUnidad}" for="codigoUnidad" />
-                        <p:inputText id="codigoUnidad" value="#{detordenController.selected.codigoUnidad}" title="#{myBundle.CreateDetordenTitle_codigoUnidad}"/>
-
+                        <p:selectOneMenu filter="true" id="codigoUnidad" value="#{detordenController.selected.unidades}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unidadesController.items}"
+                                           var="unidadesItem"                                        
+                                           itemValue="#{unidadesItem}"
+                                           itemLabel="#{unidadesItem.descripcion}"/>
+                            <f:converter binding="#{unidadesConverter}"/>
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{detordenController.selected.cantidad}" title="#{myBundle.CreateDetordenTitle_cantidad}"/>
 
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_preciouni}" for="preciouni" />
-                        <p:inputText id="preciouni" value="#{detordenController.selected.preciouni}" title="#{myBundle.CreateDetordenTitle_preciouni}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_valorreq}" for="valorreq" />
-                        <p:inputText id="valorreq" value="#{detordenController.selected.valorreq}" title="#{myBundle.CreateDetordenTitle_valorreq}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_fecharequerido}" for="fecharequerido" />
-                        <p:calendar id="fecharequerido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fecharequerido}" title="#{myBundle.EditDetordenTitle_fecharequerido}"  showOn="button"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_fecharecibido}" for="fecharecibido" />
-                        <p:calendar id="fecharecibido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fecharecibido}" title="#{myBundle.EditDetordenTitle_fecharecibido}"  showOn="button"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_recibido}" for="recibido" />
-                        <p:inputText id="recibido" value="#{detordenController.selected.recibido}" title="#{myBundle.CreateDetordenTitle_recibido}" size="1" maxlength="1"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_cantidadRec}" for="cantidadRec" />
-                        <p:inputText id="cantidadRec" value="#{detordenController.selected.cantidadRec}" title="#{myBundle.CreateDetordenTitle_cantidadRec}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_calidad}" for="calidad" />
-                        <p:inputText id="calidad" value="#{detordenController.selected.calidad}" title="#{myBundle.CreateDetordenTitle_calidad}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_cantCal}" for="cantCal" />
-                        <p:inputText id="cantCal" value="#{detordenController.selected.cantCal}" title="#{myBundle.CreateDetordenTitle_cantCal}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_fechaPromesa}" for="fechaPromesa" />
-                        <p:calendar id="fechaPromesa" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fechaPromesa}" title="#{myBundle.EditDetordenTitle_fechaPromesa}"  showOn="button"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_fechaSurtido}" for="fechaSurtido" />
-                        <p:calendar id="fechaSurtido" pattern="MM/dd/yyyy HH:mm:ss" value="#{detordenController.selected.fechaSurtido}" title="#{myBundle.EditDetordenTitle_fechaSurtido}"  showOn="button"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_cantSurtida}" for="cantSurtida" />
-                        <p:inputText id="cantSurtida" value="#{detordenController.selected.cantSurtida}" title="#{myBundle.CreateDetordenTitle_cantSurtida}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_ordenenc}" for="ordenenc" />
-                        <p:selectOneMenu id="ordenenc" value="#{detordenController.selected.ordenenc}" required="true" requiredMessage="#{myBundle.EditDetordenRequiredMessage_ordenenc}">
-                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{ordenencController.items}"
-                                           var="ordenencItem"
-                                           itemValue="#{ordenencItem}"
-                                           itemLabel="#{ordenencItem.ordenencPK.toString()}"
-                                           />
-                            <f:converter binding="#{ordenencConverter}"/>
-                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{detordenController.saveNew}" value="#{myBundle.Save}" update="display,:DetordenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenCreateDialog);"/>
                     <p:commandButton value="#{myBundle.Cancel}" onclick="DetordenCreateDialog.hide()"/>

@@ -56,6 +56,10 @@ public class Detorden implements Serializable {
     private String nombre;
     @Column(name = "CODIGO_UNIDAD")
     private Short codigoUnidad;
+    @JoinColumns({
+        @JoinColumn(name = "CODIGO_UNIDAD", referencedColumnName = "CODIGO_UNIDAD", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+     private Unidades unidades;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "CANTIDAD")
     private BigDecimal cantidad;
@@ -91,6 +95,12 @@ public class Detorden implements Serializable {
         @JoinColumn(name = "NUM_ORDEN", referencedColumnName = "NUM_ORDEN", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Ordenenc ordenenc;
+    
+     @JoinColumns({
+        @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
+        @JoinColumn(name = "COD_PROD", referencedColumnName = "COD_PROD", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+     private Productos productos;
 
     public Detorden() {
     }
@@ -255,5 +265,23 @@ public class Detorden implements Serializable {
     public String toString() {
         return "com.entities.Detorden[ detordenPK=" + detordenPK + " ]";
     }
+
+    public Productos getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Productos productos) {
+        this.productos = productos;
+    }
+
+    public Unidades getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(Unidades unidades) {
+        this.unidades = unidades;
+    }
+    
+    
     
 }

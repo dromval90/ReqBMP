@@ -8,9 +8,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,12 +16,7 @@ import javax.validation.constraints.Size;
  * @author dromero
  */
 @Embeddable
-public class DetordenPK implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "NUM_ORDEN")
-    private String numOrden;
+public class ProductosPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "COD_CIA")
@@ -34,23 +26,13 @@ public class DetordenPK implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "COD_PROD")
     private String codProd;
-      
-    
-    public DetordenPK() {
+
+    public ProductosPK() {
     }
 
-    public DetordenPK(String numOrden, short codCia, String codProd) {
-        this.numOrden = numOrden;
+    public ProductosPK(short codCia, String codProd) {
         this.codCia = codCia;
         this.codProd = codProd;
-    }
-
-    public String getNumOrden() {
-        return numOrden;
-    }
-
-    public void setNumOrden(String numOrden) {
-        this.numOrden = numOrden;
     }
 
     public short getCodCia() {
@@ -72,7 +54,6 @@ public class DetordenPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (numOrden != null ? numOrden.hashCode() : 0);
         hash += (int) codCia;
         hash += (codProd != null ? codProd.hashCode() : 0);
         return hash;
@@ -81,13 +62,10 @@ public class DetordenPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DetordenPK)) {
+        if (!(object instanceof ProductosPK)) {
             return false;
         }
-        DetordenPK other = (DetordenPK) object;
-        if ((this.numOrden == null && other.numOrden != null) || (this.numOrden != null && !this.numOrden.equals(other.numOrden))) {
-            return false;
-        }
+        ProductosPK other = (ProductosPK) object;
         if (this.codCia != other.codCia) {
             return false;
         }
@@ -99,8 +77,7 @@ public class DetordenPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entities.DetordenPK[ numOrden=" + numOrden + ", codCia=" + codCia + ", codProd=" + codProd + " ]";
+        return "com.entities.ProductosPK[ codCia=" + codCia + ", codProd=" + codProd + " ]";
     }
-  
     
 }
