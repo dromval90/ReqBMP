@@ -50,7 +50,7 @@ public abstract class AbstractController<T> {
     }
 
     public void setSelected(T selected) {
-        this.selected = selected;
+            this.selected = selected;
     }
 
     protected void setEmbeddableKeys() {

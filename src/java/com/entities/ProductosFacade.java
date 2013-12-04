@@ -28,8 +28,8 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         super(Productos.class);
     }
     
-    @Override
-    public List<Productos> findAll(){
+   
+    public List<Productos> findCategoria(String cod_cat){
 	 TypedQuery<Productos> q;
 	 
 	    LoginBean lb= new LoginBean();	
@@ -37,7 +37,7 @@ public class ProductosFacade extends AbstractFacade<Productos> {
 	
 		 q = em.createNamedQuery("Productos.findByCodCia", Productos.class )		    
 		    .setParameter("codCia",  codCia )
-                    .setParameter("codCat",  "81" );
+                    .setParameter("codCat",  cod_cat );
                  
          return q.getResultList();
     

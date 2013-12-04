@@ -108,7 +108,7 @@
                         <p:outputLabel value="#{myBundle.EditOrdenencLabel_updatedAt}" for="updatedAt" />
                         <p:calendar id="updatedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenencController.selected.updatedAt}" title="#{myBundle.EditOrdenencTitle_updatedAt}"  showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ordenencController.save}" value="#{myBundle.Save}" update="display,:OrdenencListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OrdenencEditDialog);"/>
+                    <p:commandButton actionListener="#{ordenencController.save}" value="#{myBundle.Save}" update="display,:growl" oncomplete="handleSubmit(xhr,status,args,OrdenencEditDialog);"/>
                     <p:commandButton value="#{myBundle.Cancel}" onclick="OrdenencEditDialog.hide()"/>
                 </h:panelGroup>
 

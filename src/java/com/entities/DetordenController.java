@@ -1,15 +1,21 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean(name = "detordenController")
 @ViewScoped
-public class DetordenController extends AbstractController<Detorden> implements Serializable {
 
+
+public class DetordenController extends AbstractController<Detorden> implements Serializable {
+    
     @EJB
     private DetordenFacade ejbFacade;
 
@@ -32,4 +38,18 @@ public class DetordenController extends AbstractController<Detorden> implements 
     protected void initializeEmbeddableKey() {
         this.getSelected().setDetordenPK(new com.entities.DetordenPK());
     }
+    
+    @Override
+    public void saveNew(ActionEvent event) {
+        
+
+    }
+    
+    public String fun(){
+   return "Hola Mundo";
+    }
+  
+    
+    
+    
 }

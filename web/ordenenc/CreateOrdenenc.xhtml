@@ -9,24 +9,41 @@
      <h:form id="OrdenencCreateForm">
 
          <h:panelGroup id="display">
-                    <p:panelGrid columns="4" style="margin: 0 auto;">
+                    <p:panelGrid columns="6" style="margin: 0 auto;">
+                       <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{ordenencController.prepareCreate}" update="@form" process="@this"/>
+                       <p:commandButton actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.Save}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg,:growl"/> 
+                       <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_codCia}" for="ordenencPK_codCia" />
+                        <p:inputText id="ordenencPK_codCia" value="#{ordenencController.selected.ordenencPK.codCia}" title="#{myBundle.CreateOrdenencTitle_ordenencPK_codCia}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_ordenencPK_codCia}"/>
 
+                        
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
                         <p:inputText id="ordenencPK_numOrden" value="#{ordenencController.selected.ordenencPK.numOrden}" title="#{myBundle.CreateOrdenencTitle_ordenencPK_numOrden}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_ordenencPK_numOrden}" size="10" maxlength="10"/>
                         
                         
+                    
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codEmp}" for="codEmp" />
+                        <p:inputText id="codEmp" value="#{ordenencController.selected.codEmp}" title="#{myBundle.CreateOrdenencTitle_codEmp}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_codEmp}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_solicitante}" for="solicitante" />
+                        <p:inputText id="solicitante" value="#{ordenencController.selected.solicitante}" title="#{myBundle.CreateOrdenencTitle_solicitante}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_solicitante}"/>
+
+                        
+                        <p:outputLabel value="#{myBundle.CreateOrdenencLabel_proyecto}" for="proyecto" />
+                        <p:inputText id="proyecto" value="#{ordenencController.selected.proyecto}" title="#{myBundle.CreateOrdenencTitle_proyecto}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_proyecto}" size="20" maxlength="20"/>
+                        
+                        
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_tipoOrden}" for="tipoOrden" />
-                        <p:selectOneMenu id="tipoOrden" value="#{tipoOrden.string}">  
+                        <p:selectOneMenu id="tipoOrden" value="#{ordenencController.selected.tipoOrden}">  
                             <f:selectItem itemLabel="Requisicion BMP" itemValue="P" />  
                         </p:selectOneMenu>  
                         
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codProv}" for="codProv" />
-                        <p:selectOneMenu id="codProv" value="#{tipoOrden.string}">  
+                        <p:selectOneMenu id="codProv" value="#{ordenencController.selected.codProv}">  
                             <f:selectItem itemLabel="INDUSTRIAS CARICIAS, S.A. DE C.V" itemValue="569" />  
                         </p:selectOneMenu> 
                      
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codigoGrupo}" for="codigoGrupo" />
-                        <p:selectOneMenu id="codigoGrupo" value="#{tipoOrden.string}">  
+                        <p:selectOneMenu id="codigoGrupo" value="#{ordenencController.selected.codigoGrupo}">  
                             <f:selectItem itemLabel="MATERIA PRIMA" itemValue="2" />  
                         </p:selectOneMenu> 
 
@@ -41,7 +58,11 @@
                                            itemLabel="#{categoriasItem.nomCat}"
                                          />
                             <f:converter binding="#{categoriasConverter}"/>
+                            
                         </p:selectOneMenu>
+                        
+                       
+                      
                         
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_fechaOrden}" for="fechaOrden" />
                         <p:calendar id="fechaOrden" pattern="dd/MM/yyyy" value="#{ordenencController.selected.fechaOrden}" title="#{myBundle.EditOrdenencTitle_fechaOrden}"  showOn="button"/>
@@ -51,8 +72,8 @@
                         
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_observaciones}" for="observaciones" />
                         <p:inputTextarea id="observaciones" rows="6" cols="33" maxlength="150" title="#{myBundle.CreateOrdenencTitle_observaciones}" value="#{ordenencController.selected.observaciones}"/> 
+                                            
                         
-     
                     </p:panelGrid>
                 </h:panelGroup>
 
@@ -86,7 +107,7 @@
                     <h:outputText value="#{item.nombre}"/>
                 </p:column>
                 <p:column headerText="#{myBundle.ListDetordenTitle_codigoUnidad}">
-                    <h:outputText value="#{item.codigoUnidad}"/>
+                    <h:outputText value="#{item.unidades.descripcion}"/>
                 </p:column>
 
                 <p:column headerText="#{myBundle.ListDetordenTitle_cantidad}">
@@ -95,7 +116,7 @@
                 <f:facet name="footer">
                     <div class="footer-section">
                         
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{detordenController.prepareCreate}"  oncomplete="DetordenCreateDialog.show()"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{detordenController.fun}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg" process="@this"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" oncomplete="DetordenViewDialog.show()" disabled="#{empty detordenController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}"  oncomplete="DetordenEditDialog.show()" disabled="#{empty detordenController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{detordenController.delete}" update=":growl,datalist" disabled="#{empty detordenController.selected}"/>

@@ -98,9 +98,6 @@ public class Ordenenc implements Serializable {
         @JoinColumn(name = "SOLICITANTE", referencedColumnName = "COD_EMP", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
      private Empleados empleados2;
-    @Basic(optional = false)
-    @NotNull
-    @Size(max = 10)
     @Column(name = "NUM_PEDIDO")
     private String numPedido;
     @Basic(optional = false)

@@ -36,8 +36,7 @@ public class DetordenFacade extends AbstractFacade<Detorden> {
 	    short codCia = lb.sscia();
 	
 		 q = em.createNamedQuery("Detorden.findByCodCia", Detorden.class )		    
-		    .setParameter("codCia",  1 )
-                    .setParameter("numOrden",  "49150" );
+		    .setParameter("codCia",  0 );
          return q.getResultList();
     
     }
