@@ -39,8 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ordenenc.findByFechaOrden", query = "SELECT o FROM Ordenenc o WHERE o.fechaOrden = :fechaOrden"),
     @NamedQuery(name = "Ordenenc.findByCodCia", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia"),
     @NamedQuery(name = "Ordenenc.findByCodigoGrupo", query = "SELECT o FROM Ordenenc o WHERE o.codigoGrupo = :codigoGrupo"),
-    @NamedQuery(name = "Ordenenc.findByCodEmp", query = "SELECT o FROM Ordenenc o WHERE o.codEmp = :codEmp"),
-    @NamedQuery(name = "Ordenenc.findBySolicitante", query = "SELECT o FROM Ordenenc o WHERE o.solicitante = :solicitante"),
     @NamedQuery(name = "Ordenenc.findByNumPedido", query = "SELECT o FROM Ordenenc o WHERE o.numPedido = :numPedido"),
     @NamedQuery(name = "Ordenenc.findByCodProv", query = "SELECT o FROM Ordenenc o WHERE o.codProv = :codProv"),
     @NamedQuery(name = "Ordenenc.findByFormaPago", query = "SELECT o FROM Ordenenc o WHERE o.formaPago = :formaPago"),
@@ -56,11 +54,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ordenenc.findByFechaanulado", query = "SELECT o FROM Ordenenc o WHERE o.fechaanulado = :fechaanulado"),
     @NamedQuery(name = "Ordenenc.findByNumReq", query = "SELECT o FROM Ordenenc o WHERE o.numReq = :numReq"),
     @NamedQuery(name = "Ordenenc.findByAnio", query = "SELECT o FROM Ordenenc o WHERE o.anio = :anio"),
-    @NamedQuery(name = "Ordenenc.findByCoddeptoSol", query = "SELECT o FROM Ordenenc o WHERE o.coddeptoSol = :coddeptoSol"),
     @NamedQuery(name = "Ordenenc.findByUsuario", query = "SELECT o FROM Ordenenc o WHERE o.usuario = :usuario"),
     @NamedQuery(name = "Ordenenc.findByFechaIng", query = "SELECT o FROM Ordenenc o WHERE o.fechaIng = :fechaIng"),
     @NamedQuery(name = "Ordenenc.findByAutorizada", query = "SELECT o FROM Ordenenc o WHERE o.autorizada = :autorizada"),
-    @NamedQuery(name = "Ordenenc.findByCodCat", query = "SELECT o FROM Ordenenc o WHERE o.codCat = :codCat"),
     @NamedQuery(name = "Ordenenc.findByTipoOrden", query = "SELECT o FROM Ordenenc o WHERE o.tipoOrden = :tipoOrden"),
     @NamedQuery(name = "Ordenenc.findByZapateria", query = "SELECT o FROM Ordenenc o WHERE o.zapateria = :zapateria"),
     @NamedQuery(name = "Ordenenc.findByPlanta", query = "SELECT o FROM Ordenenc o WHERE o.planta = :planta"),
@@ -80,19 +76,11 @@ public class Ordenenc implements Serializable {
     @Size(min = 1, max = 2)
     @Column(name = "CODIGO_GRUPO")
     private String codigoGrupo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "COD_EMP")
-    private int codEmp;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_EMP", referencedColumnName = "COD_EMP", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
      private Empleados empleados;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SOLICITANTE")
-    private int solicitante;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "SOLICITANTE", referencedColumnName = "COD_EMP", insertable = false, updatable = false)})
@@ -144,8 +132,6 @@ public class Ordenenc implements Serializable {
     private String numReq;
     @Column(name = "ANIO")
     private Short anio;
-    @Column(name = "CODDEPTO_SOL")
-    private Short coddeptoSol;
     @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "CODDEPTO_SOL", referencedColumnName = "COD_DEPTO", insertable = false, updatable = false)})
@@ -162,9 +148,6 @@ public class Ordenenc implements Serializable {
     @Size(max = 1)
     @Column(name = "AUTORIZADA")
     private String autorizada;
-    @Size(max = 3)
-    @Column(name = "COD_CAT")
-    private String codCat;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_CAT", referencedColumnName = "COD_CAT", insertable = false, updatable = false)})
@@ -198,11 +181,9 @@ public class Ordenenc implements Serializable {
         this.ordenencPK = ordenencPK;
     }
 
-    public Ordenenc(OrdenencPK ordenencPK, String codigoGrupo, int codEmp, int solicitante, String codProv, String proyecto) {
+    public Ordenenc(OrdenencPK ordenencPK, String codigoGrupo, String codProv, String proyecto) {
         this.ordenencPK = ordenencPK;
         this.codigoGrupo = codigoGrupo;
-        this.codEmp = codEmp;
-        this.solicitante = solicitante;
         this.codProv = codProv;
         this.proyecto = proyecto;
     }
@@ -235,22 +216,7 @@ public class Ordenenc implements Serializable {
         this.codigoGrupo = codigoGrupo;
     }
 
-    public int getCodEmp() {
-        return codEmp;
-    }
-
-    public void setCodEmp(int codEmp) {
-        this.codEmp = codEmp;
-    }
-
-    public int getSolicitante() {
-        return solicitante;
-    }
-
-    public void setSolicitante(int solicitante) {
-        this.solicitante = solicitante;
-    }
-
+   
     public String getNumPedido() {
         return numPedido;
     }
@@ -371,13 +337,7 @@ public class Ordenenc implements Serializable {
         this.anio = anio;
     }
 
-    public Short getCoddeptoSol() {
-        return coddeptoSol;
-    }
-
-    public void setCoddeptoSol(Short coddeptoSol) {
-        this.coddeptoSol = coddeptoSol;
-    }
+   
 
     public String getUsuario() {
         return usuario;
@@ -403,14 +363,7 @@ public class Ordenenc implements Serializable {
         this.autorizada = autorizada;
     }
 
-    public String getCodCat() {
-        return codCat;
-    }
-
-    public void setCodCat(String codCat) {
-        this.codCat = codCat;
-    }
-
+    
     public String getTipoOrden() {
         return tipoOrden;
     }

@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Detorden.findByCodCia", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codCia = :codCia"),
     @NamedQuery(name = "Detorden.findByCodProd", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codProd = :codProd"),
     @NamedQuery(name = "Detorden.findByNombre", query = "SELECT d FROM Detorden d WHERE d.nombre = :nombre"),
-    @NamedQuery(name = "Detorden.findByCodigoUnidad", query = "SELECT d FROM Detorden d WHERE d.codigoUnidad = :codigoUnidad"),
     @NamedQuery(name = "Detorden.findByCantidad", query = "SELECT d FROM Detorden d WHERE d.cantidad = :cantidad"),
     @NamedQuery(name = "Detorden.findByPreciouni", query = "SELECT d FROM Detorden d WHERE d.preciouni = :preciouni"),
     @NamedQuery(name = "Detorden.findByValorreq", query = "SELECT d FROM Detorden d WHERE d.valorreq = :valorreq"),
@@ -54,8 +53,6 @@ public class Detorden implements Serializable {
     @Size(max = 200)
     @Column(name = "NOMBRE")
     private String nombre;
-    @Column(name = "CODIGO_UNIDAD")
-    private Short codigoUnidad;
     @JoinColumns({
         @JoinColumn(name = "CODIGO_UNIDAD", referencedColumnName = "CODIGO_UNIDAD", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
@@ -95,7 +92,6 @@ public class Detorden implements Serializable {
         @JoinColumn(name = "NUM_ORDEN", referencedColumnName = "NUM_ORDEN", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Ordenenc ordenenc;
-    
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_PROD", referencedColumnName = "COD_PROD", insertable = false, updatable = false)})
@@ -127,14 +123,6 @@ public class Detorden implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Short getCodigoUnidad() {
-        return codigoUnidad;
-    }
-
-    public void setCodigoUnidad(Short codigoUnidad) {
-        this.codigoUnidad = codigoUnidad;
     }
 
     public BigDecimal getCantidad() {

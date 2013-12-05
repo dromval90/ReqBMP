@@ -38,9 +38,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Empleados.findAll", query = "SELECT e FROM Empleados e"),
     @NamedQuery(name = "Empleados.findByCodCia", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codCia = :codCia"),
+    @NamedQuery(name = "Empleados.findByTipoPla", query = "SELECT e FROM Empleados e JOIN e.departamentos d  WHERE e.empleadosPK.codCia = :codCia and e.status like :status and d.codTipopla = :codTipopla"),
     @NamedQuery(name = "Empleados.findByVac", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codCia = :codCia and e.status like :status and e.vacaciones = :vacaciones "),    
     @NamedQuery(name = "Empleados.findByFiltros", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codCia like :codCia  and  e.apellidos like :apellidos and e.nombres like :nombres"),
-    @NamedQuery(name = "Empleados.findByPk2", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codCia = :codCia and  e.empleadosPK.codEmp = :codEmp"),    
+    @NamedQuery(name = "Empleados.findByPk2", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codCia = :codCia and  e.empleadosPK.codEmp = :codEmp"),        
+    @NamedQuery(name = "Empleados.findByDeptos", query = "SELECT e FROM Empleados e  WHERE  e.empleadosPK.codCia = :codCia and e.status like :status"	
+	+ " and e.departamentos.departamentosPK.codDepto in :departamentos  "),    
     @NamedQuery(name = "Empleados.findByCodEmp", query = "SELECT e FROM Empleados e WHERE e.empleadosPK.codEmp = :codEmp"),
     @NamedQuery(name = "Empleados.findByApellidos", query = "SELECT e FROM Empleados e WHERE e.apellidos = :apellidos"),
     @NamedQuery(name = "Empleados.findByNombres", query = "SELECT e FROM Empleados e WHERE e.nombres = :nombres"),
@@ -98,7 +101,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleados.findByPassword", query = "SELECT e FROM Empleados e WHERE e.password = :password")})
 public class Empleados implements Serializable {
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleados")
+    
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EmpleadosPK empleadosPK;
@@ -265,18 +268,12 @@ public class Empleados implements Serializable {
     @Size(max = 250)
     @Column(name = "PASSWORD")
     private String password;
-
-   
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleados")
-     private List<Ordenenc> ordenencList;
-    
     @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_DEPTO", referencedColumnName = "COD_DEPTO")})
     @ManyToOne(optional = false)
     private Departamentos departamentos;
-    
-  
+
     public Empleados() {
     }
 
@@ -743,6 +740,14 @@ public class Empleados implements Serializable {
 
     
 
+    public Departamentos getDepartamentos() {
+	return departamentos;
+    }
+
+    public void setDepartamentos(Departamentos departamentos) {
+	this.departamentos = departamentos;
+    }
+
     @Override
     public int hashCode() {
 	int hash = 0;
@@ -767,24 +772,6 @@ public class Empleados implements Serializable {
     public String toString() {
 	return "com.entities.Empleados[ empleadosPK=" + empleadosPK + " ]";
     }
-
-    public List<Ordenenc> getOrdenencList() {
-        return ordenencList;
-    }
-
-    public void setOrdenencList(List<Ordenenc> ordenencList) {
-        this.ordenencList = ordenencList;
-    }
-
-    public Departamentos getDepartamentos() {
-        return departamentos;
-    }
-
-    public void setDepartamentos(Departamentos departamentos) {
-        this.departamentos = departamentos;
-    }
-    
-    
    
         
 }

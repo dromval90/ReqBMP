@@ -12,8 +12,8 @@
                     <p:panelGrid columns="4" style="margin: 0 auto;">
                         <f:facet name="header">
                             <div>
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.CreateEncabezado}" actionListener="#{ordenencController.prepareCreate}" update="@form" process="@this"/>
-                                <p:commandButton actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.SaveDetalle}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg,:growl"/> 
+                                <p:commandButton id="createButton" icon="ui-icon-document"   value="#{myBundle.CreateEncabezado}" actionListener="#{ordenencController.prepareCreate}" update="@form" process="@this"/>
+                                <p:commandButton id="adddetallereq" icon="ui-icon-plus" actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.SaveDetalle}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg,:growl"/> 
                             </div>
                         </f:facet>     
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
@@ -53,10 +53,7 @@
                         <p:calendar id="fechaIng" pattern="dd/MM/yyyy" value="#{ordenencController.selected.fechaIng}" title="#{myBundle.EditOrdenencTitle_fechaIng}"  showOn="button"/>
                         
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_observaciones}" for="observaciones" />
-                        <p:inputTextarea id="observaciones" rows="6" cols="33" maxlength="150" title="#{myBundle.CreateOrdenencTitle_observaciones}" value="#{ordenencController.selected.observaciones}"/> 
-                         
-                        
-                        
+                        <p:inputTextarea id="observaciones" rows="6" cols="33" maxlength="150" title="#{myBundle.CreateOrdenencTitle_observaciones}" value="#{ordenencController.selected.observaciones}"/>                      
                        
                     </p:panelGrid>
                     
@@ -67,7 +64,7 @@
             <h:form id="DetordenListForm">
 
         <p:panel header="#{myBundle.ListDetordenTitle}">           
-            <p:dataTable id="datalist" value="#{detordenController.items}" var="item"
+            <p:dataTable id="datalist" value="#{ordenencController.detorden}" var="item"
                          selectionMode="single" selection="#{detordenController.selected}"
                          rowKey="#{item.detordenPK}"
                          paginator="true"
@@ -82,11 +79,11 @@
                     </f:facet>
                     <h:outputText value="#{item.detordenPK.codProd}"/>
                 </p:column>
-                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.productos.nombre}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListDetordenTitle_nombre}"/>
                     </f:facet>
-                    <h:outputText value="#{item.nombre}"/>
+                    <h:outputText value="#{item.productos.nombre}"/>
                 </p:column>
                 <p:column headerText="#{myBundle.ListDetordenTitle_codigoUnidad}">
                     <h:outputText value="#{item.unidades.descripcion}"/>
@@ -95,7 +92,11 @@
                 <p:column headerText="#{myBundle.ListDetordenTitle_cantidad}">
                     <h:outputText value="#{item.cantidad}"/>
                 </p:column>
-               
+               <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{ordenencController.deleteDetalleRequisicion(item)}" update=":growl,datalist" disabled="#{empty ordenencController.detorden}"/>
+                    </div>
+                </f:facet>
             </p:dataTable>
 
         </p:panel>
