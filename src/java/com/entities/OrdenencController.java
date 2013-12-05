@@ -1,7 +1,9 @@
 package com.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,9 +43,16 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     }
 
     @Override
-    protected void initializeEmbeddableKey() {
-    
-        this.getSelected().setOrdenencPK(new com.entities.OrdenencPK());
+    protected void initializeEmbeddableKey() {  
+        LoginBean lb= new LoginBean();	
+        short codCia = lb.sscia();
+        this.getSelected().setCodEmp(2824);
+        this.getSelected().setSolicitante(2824);
+        this.getSelected().setProyecto("BMP");
+        Date hoy = new Date();
+        this.getSelected().setFechaIng(hoy);
+        this.getSelected().setFechaOrden(hoy);
+        this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("89954",codCia));
     }
 
     public Detorden getDetalleRequisicion() {
@@ -77,36 +86,17 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.CatxProd = CatxProd;
     }
     
-
-  
-       /* public Detorden prepareCreate2() {
-
-        try {
-              String var;
-              var= OrdenencController.this.getSelected().getCodCat();
-              Detorden newItem;  
-            newItem = Detorden.class.newInstance();
-            this.DetalleRequisicion = newItem;
-            //initializeEmbeddableKey();
-            this.DetalleRequisicion.setDetordenPK(new com.entities.DetordenPK());
-            
-            return newItem;
-        } catch (InstantiationException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }*/
-    
     public Detorden prepareCreate2(ActionEvent event) {
         Detorden newItem;
-        try {
-            //short codcia = this.getSelected().getOrdenencPK().getCodCia();
-            newItem = Detorden.class.newInstance();
-            this.DetalleRequisicion = newItem;
-            //initializeEmbeddableKey();
-            return newItem;
+        try {           
+             newItem = Detorden.class.newInstance();
+             this.DetalleRequisicion = newItem;
+             DetordenPK PKdetorden = new DetordenPK(this.getSelected().getOrdenencPK().getNumOrden(),this.getSelected().getOrdenencPK().getCodCia(),null);
+             this.DetalleRequisicion.setDetordenPK(PKdetorden);
+            /* this.DetalleRequisicion.detordenPK.setCodCia(this.getSelected().ordenencPK.getCodCia());
+             this.DetalleRequisicion.detordenPK.setNumOrden(this.getSelected().ordenencPK.getNumOrden());*/
+        
+             return newItem;
             
                 /*String orden = this.getSelected().getOrdenencPK().getNumOrden();
                 BigDecimal cat = new BigDecimal(this.getSelected().getCodCat());
@@ -125,7 +115,24 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         return null;
     }    
 
-  
+   /* @Override
+     public void saveNew(ActionEvent event) {
+      
+    }*/
+    
+    public void addDetalleRequisicion(){
+        
+       try{
+            this.DetalleRequisicion.getDetordenPK().setCodProd(this.DetalleRequisicion.getProductos().getProductosPK().getCodProd());
+             this.DetalleRequisicion.setCodigoUnidad(this.DetalleRequisicion.getUnidades().getCodigoUnidad());
+             this.detorden.add(this.getDetalleRequisicion());
+      
+       }catch(Exception ex){
+           ex.toString();
+       }
+            
+       
+    }
     
     
     

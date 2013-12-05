@@ -516,6 +516,8 @@ public class Ordenenc implements Serializable {
     public void setDepartamentos(Departamentos departamentos) {
         this.departamentos = departamentos;
     }
+
+   
     
     
     
