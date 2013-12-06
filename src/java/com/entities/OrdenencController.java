@@ -1,5 +1,7 @@
 package com.entities;
 
+
+import com.ejb.SB_RequisicionBMP;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -21,6 +23,9 @@ import javax.faces.event.ActionEvent;
 
 public class OrdenencController extends AbstractController<Ordenenc> implements Serializable {
     @EJB
+    private SB_RequisicionBMP sB_RequisicionBMP;
+
+    @EJB
     private CategoriasFacade categoriasFacade;
     @EJB
     private EmpleadosFacade empleadosFacade;
@@ -30,6 +35,8 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
 
     @EJB
     private OrdenencFacade ejbFacade;
+    
+    
     
     
     
@@ -57,11 +64,12 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             LoginBean lb= new LoginBean();	
             short codCia = lb.sscia();
             Empleados emp = new Empleados();
-           // Categorias cat = new Categorias();
-            emp = empleadosFacade.findbyUsuario(lb.ssuser());	
-           // cat = categoriasFacade.findbyCodcat("61");
+            emp = empleadosFacade.findbyUsuario(lb.ssuser());	    
             this.getSelected().setEmpleados(emp);
+            this.getSelected().setCodEmp(emp.getEmpleadosPK().getCodEmp());
+            this.getSelected().setSolicitante(emp.getEmpleadosPK().getCodEmp());
             this.getSelected().setEmpleados2(emp);
+            this.getSelected().setCoddeptoSol(emp.getDepartamentos().getDepartamentosPK().getCodDepto());
             this.getSelected().setDepartamentos(emp.getDepartamentos());
             this.getSelected().setProyecto(emp.getDepartamentos().getProyecto());
             Date hoy = new Date();
@@ -74,8 +82,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.getSelected().setAutorizada("N");
             this.getSelected().setStatus("D");
             this.getSelected().setUsuario(lb.ssuser());
-            //this.getSelected().setCategorias(cat);
-            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("0",codCia));
+            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49157",codCia));
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -165,7 +172,11 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         
        try{
             this.DetalleRequisicion.getDetordenPK().setCodProd(this.DetalleRequisicion.getProductos().getProductosPK().getCodProd());
-            this.DetalleRequisicion.setOrdenenc(this.getSelected());          
+            this.DetalleRequisicion.setOrdenenc(this.getSelected()); 
+            this.DetalleRequisicion.setNombre(this.DetalleRequisicion.getProductos().getNombre());
+            this.DetalleRequisicion.setPreciouni(this.DetalleRequisicion.getProductos().getCosto());
+            this.DetalleRequisicion.setFecharequerido(this.getSelected().getFechaOrden());
+            this.DetalleRequisicion.setRecibido("G");
             this.getDetorden().add(this.getDetalleRequisicion());      
        }catch(Exception ex){
            ex.toString();
@@ -180,6 +191,11 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         }catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+    
+    public void saveNewRequisicion(){
+        this.getSelected().setCodCat(this.getSelected().getCategorias().getCategoriasPK().getCodCat());
+        sB_RequisicionBMP.insertarRequisicion(this.getSelected(), this.getDetorden());
     }
     
     

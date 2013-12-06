@@ -76,11 +76,19 @@ public class Ordenenc implements Serializable {
     @Size(min = 1, max = 2)
     @Column(name = "CODIGO_GRUPO")
     private String codigoGrupo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "COD_EMP")
+    private int codEmp;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_EMP", referencedColumnName = "COD_EMP", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
      private Empleados empleados;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "SOLICITANTE")
+    private int solicitante;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "SOLICITANTE", referencedColumnName = "COD_EMP", insertable = false, updatable = false)})
@@ -132,6 +140,8 @@ public class Ordenenc implements Serializable {
     private String numReq;
     @Column(name = "ANIO")
     private Short anio;
+    @Column(name = "CODDEPTO_SOL")
+    private Short coddeptoSol;
     @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "CODDEPTO_SOL", referencedColumnName = "COD_DEPTO", insertable = false, updatable = false)})
@@ -148,6 +158,9 @@ public class Ordenenc implements Serializable {
     @Size(max = 1)
     @Column(name = "AUTORIZADA")
     private String autorizada;
+    @Size(max = 3)
+    @Column(name = "COD_CAT")
+    private String codCat;
      @JoinColumns({
         @JoinColumn(name = "COD_CIA", referencedColumnName = "COD_CIA", insertable = false, updatable = false),
         @JoinColumn(name = "COD_CAT", referencedColumnName = "COD_CAT", insertable = false, updatable = false)})
@@ -468,6 +481,38 @@ public class Ordenenc implements Serializable {
 
     public void setDepartamentos(Departamentos departamentos) {
         this.departamentos = departamentos;
+    }
+
+    public int getCodEmp() {
+        return codEmp;
+    }
+
+    public void setCodEmp(int codEmp) {
+        this.codEmp = codEmp;
+    }
+
+    public int getSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(int solicitante) {
+        this.solicitante = solicitante;
+    }
+
+    public Short getCoddeptoSol() {
+        return coddeptoSol;
+    }
+
+    public void setCoddeptoSol(Short coddeptoSol) {
+        this.coddeptoSol = coddeptoSol;
+    }
+
+    public String getCodCat() {
+        return codCat;
+    }
+
+    public void setCodCat(String codCat) {
+        this.codCat = codCat;
     }
 
    
