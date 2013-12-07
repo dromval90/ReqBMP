@@ -82,7 +82,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.getSelected().setAutorizada("N");
             this.getSelected().setStatus("D");
             this.getSelected().setUsuario(lb.ssuser());
-            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49157",codCia));
+            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49158",codCia));
         }catch(Exception ex){
             ex.printStackTrace();
         }

@@ -25,6 +25,8 @@ import javax.ejb.Stateless;
 @Stateless
 public class SB_RequisicionBMP {
     @EJB
+    private EmailBean emailBean;
+    @EJB
     private DocumentoFacade documentoFacade;
     @EJB
     private DetordenFacade detordenFacade;
@@ -67,6 +69,7 @@ public class SB_RequisicionBMP {
             docAutorizacion.setObservaciones(EncOrden.getObservaciones());
             docAutorizacion.setDescripcion("RMP-PROV."+EncOrden.getCodProv() + " " + formato.format(EncOrden.getFechaOrden()));
             documentoFacade.edit(docAutorizacion);
+            //emailBean.sendMessage(null, null, null);
         }catch(Exception ex){
             System.out.println("Error2");
         }
