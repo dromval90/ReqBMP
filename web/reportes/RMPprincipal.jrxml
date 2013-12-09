@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="559464b0-e16c-43cf-a87d-3c3ffe1610b7">
+	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="196"/>
+	<parameter name="codCia" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numOrden" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from ordenenc where cod_cia =$P{codCia} and NUM_ORDEN=$P{numOrden}]]>
+	</queryString>
+	<field name="NUM_ORDEN" class="java.lang.String"/>
+	<field name="FECHA_ORDEN" class="java.sql.Timestamp"/>
+	<field name="COD_CIA" class="java.math.BigDecimal"/>
+	<field name="CODIGO_GRUPO" class="java.lang.String"/>
+	<field name="COD_EMP" class="java.math.BigDecimal"/>
+	<field name="SOLICITANTE" class="java.math.BigDecimal"/>
+	<field name="NUM_PEDIDO" class="java.lang.String"/>
+	<field name="COD_PROV" class="java.lang.String"/>
+	<field name="FORMA_PAGO" class="java.lang.String"/>
+	<field name="VIA" class="java.lang.String"/>
+	<field name="NUM_DIAS" class="java.math.BigDecimal"/>
+	<field name="OBSERVACIONES" class="java.lang.String"/>
+	<field name="PROYECTO" class="java.lang.String"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="AUTORIZADO" class="java.lang.String"/>
+	<field name="FECHAUTORIZADO" class="java.sql.Timestamp"/>
+	<field name="ATENDIO" class="java.lang.String"/>
+	<field name="ANULADO" class="java.lang.String"/>
+	<field name="FECHAANULADO" class="java.sql.Timestamp"/>
+	<field name="NUM_REQ" class="java.lang.String"/>
+	<field name="ANIO" class="java.math.BigDecimal"/>
+	<field name="CODDEPTO_SOL" class="java.math.BigDecimal"/>
+	<field name="USUARIO" class="java.lang.String"/>
+	<field name="FECHA_ING" class="java.sql.Timestamp"/>
+	<field name="AUTORIZADA" class="java.lang.String"/>
+	<field name="COD_CAT" class="java.lang.String"/>
+	<field name="TIPO_ORDEN" class="java.lang.String"/>
+	<field name="ZAPATERIA" class="java.lang.String"/>
+	<field name="PLANTA" class="java.lang.String"/>
+	<field name="CREATED_AT" class="java.sql.Timestamp"/>
+	<field name="UPDATED_AT" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="251" splitType="Stretch">
+			<subreport>
+				<reportElement x="3" y="4" width="550" height="225" uuid="bbc6df34-7661-4ad1-9a93-4e5a59bfdf7f"/>
+				<subreportParameter name="codCia">
+					<subreportParameterExpression><![CDATA[$P{codCia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="numOrden">
+					<subreportParameterExpression><![CDATA[$F{NUM_ORDEN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/dromero/NetBeansProjects/RequisicionBMP/web/reportes/RequisicionMPoriginal.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="5" y="247" width="550" height="1" uuid="bb2b6b52-99af-4a03-a917-c7c45b982d89"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="234">
+			<subreport>
+				<reportElement x="3" y="4" width="550" height="225" uuid="4df6ba0f-7899-44c4-a49c-89f641162ccc"/>
+				<subreportParameter name="codCia">
+					<subreportParameterExpression><![CDATA[$P{codCia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="numOrden">
+					<subreportParameterExpression><![CDATA[$P{numOrden}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["/home/dromero/NetBeansProjects/RequisicionBMP/web/reportes/RequisicionMPcopia.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
