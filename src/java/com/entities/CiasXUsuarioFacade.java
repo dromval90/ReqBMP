@@ -4,9 +4,11 @@
  */
 package com.entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,6 +26,19 @@ public class CiasXUsuarioFacade extends AbstractFacade<CiasXUsuario> {
 
     public CiasXUsuarioFacade() {
         super(CiasXUsuario.class);
+    }
+    
+    public List<CiasXUsuario> findCiaEncaragoDepto(short codCia, String usuario){
+	 TypedQuery<CiasXUsuario> q;
+	
+		 q = em.createNamedQuery("CiasXUsuario.findCiaEncaragoDepto", CiasXUsuario.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("usuario",  usuario );
+                 if(q.getResultList() != null){
+                     return q.getResultList();
+                 }else{
+                     return null;
+                 }
     }
     
 }

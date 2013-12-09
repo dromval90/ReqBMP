@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CiasXUsuario.findAll", query = "SELECT c FROM CiasXUsuario c"),
+    @NamedQuery(name = "CiasXUsuario.findCiaEncaragoDepto", query = "SELECT c FROM CiasXUsuario c WHERE c.ciasXUsuarioPK.codCia = :codCia and c.ciasXUsuarioPK.usuario = :usuario"),
     @NamedQuery(name = "CiasXUsuario.findByCodCia", query = "SELECT c FROM CiasXUsuario c WHERE c.ciasXUsuarioPK.codCia = :codCia"),
     @NamedQuery(name = "CiasXUsuario.findByUsuario", query = "SELECT c FROM CiasXUsuario c WHERE c.ciasXUsuarioPK.usuario = :usuario"),
     @NamedQuery(name = "CiasXUsuario.findByDescripcion", query = "SELECT c FROM CiasXUsuario c WHERE c.descripcion = :descripcion"),
