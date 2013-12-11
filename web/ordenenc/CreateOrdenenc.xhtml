@@ -72,7 +72,8 @@
                          rows="10"
                          rowsPerPageTemplate="10,20,30"
                          >
-
+                <p:ajax event="rowSelect"   update="deleteButton"/>
+                <p:ajax event="rowUnselect" update="deleteButton"/>
 
                 <p:column sortBy="#{item.detordenPK.codProd}" filterBy="#{item.detordenPK.codProd}">
                     <f:facet name="header">

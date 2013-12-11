@@ -4,9 +4,12 @@
  */
 package com.entities;
 
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -14,8 +17,12 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class OrdenencFacade extends AbstractFacade<Ordenenc> {
+    @EJB
+    private EmpleadosFacade empleadosFacade;
     @PersistenceContext(unitName = "RequisicionBMPPU")
     private EntityManager em;
+    
+    
 
     @Override
     protected EntityManager getEntityManager() {
@@ -25,5 +32,24 @@ public class OrdenencFacade extends AbstractFacade<Ordenenc> {
     public OrdenencFacade() {
         super(Ordenenc.class);
     }
+    
+    @Override
+    public List<Ordenenc> findAll(){
+	 TypedQuery<Ordenenc> q;
+            LoginBean lb= new LoginBean();	
+	    short codCia = lb.sscia();
+            Empleados emp = new Empleados();
+            emp = empleadosFacade.findbyUsuario(lb.ssuser());
+		 q = em.createNamedQuery("Ordenenc.findAll", Ordenenc.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("coddeptoSol",  emp.getDepartamentos().getDepartamentosPK().getCodDepto())
+                    .setParameter("tipoOrden",  "P" );
+               
+            
+         return q.getResultList();
+        
+    
+    }
+    
     
 }

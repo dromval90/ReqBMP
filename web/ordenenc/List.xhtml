@@ -15,18 +15,11 @@
                          rowKey="#{item.ordenencPK}"
                          paginator="true"
                          rows="10"
-                         rowsPerPageTemplate="10,20,30"
-                         >
+                         rowsPerPageTemplate="10,20,30">
 
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowSelect"   update="viewButton editButton viewButtondet"/>
+                <p:ajax event="rowUnselect" update="viewButton editButton viewButtondet"/>
 
-                <p:column sortBy="#{item.ordenencPK.codCia}" filterBy="#{item.ordenencPK.codCia}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_ordenencPK_codCia}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.ordenencPK.codCia}"/>
-                </p:column>
                 <p:column sortBy="#{item.ordenencPK.numOrden}" filterBy="#{item.ordenencPK.numOrden}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListOrdenencTitle_ordenencPK_numOrden}"/>
@@ -38,74 +31,14 @@
                         <h:outputText value="#{myBundle.ListOrdenencTitle_fechaOrden}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaOrden}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
-                </p:column>
-                <p:column sortBy="#{item.codigoGrupo}" filterBy="#{item.codigoGrupo}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_codigoGrupo}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.codigoGrupo}"/>
-                </p:column>
-                <p:column sortBy="#{item.codEmp}" filterBy="#{item.codEmp}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_codEmp}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.codEmp}"/>
                 </p:column>
                 <p:column sortBy="#{item.solicitante}" filterBy="#{item.solicitante}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListOrdenencTitle_solicitante}"/>
                     </f:facet>
-                    <h:outputText value="#{item.solicitante}"/>
-                </p:column>
-                <p:column sortBy="#{item.numPedido}" filterBy="#{item.numPedido}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_numPedido}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.numPedido}"/>
-                </p:column>
-                <p:column sortBy="#{item.codProv}" filterBy="#{item.codProv}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_codProv}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.codProv}"/>
-                </p:column>
-                <p:column sortBy="#{item.formaPago}" filterBy="#{item.formaPago}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_formaPago}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.formaPago}"/>
-                </p:column>
-                <p:column sortBy="#{item.via}" filterBy="#{item.via}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_via}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.via}"/>
-                </p:column>
-                <p:column sortBy="#{item.numDias}" filterBy="#{item.numDias}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_numDias}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.numDias}"/>
-                </p:column>
-                <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_observaciones}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.observaciones}"/>
-                </p:column>
-                <p:column sortBy="#{item.proyecto}" filterBy="#{item.proyecto}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_proyecto}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.proyecto}"/>
-                </p:column>
-                <p:column sortBy="#{item.status}" filterBy="#{item.status}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_status}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.status}"/>
+                    <h:outputText value="#{item.empleados2.nombreIsss}"/>
                 </p:column>
                 <p:column sortBy="#{item.autorizado}" filterBy="#{item.autorizado}">
                     <f:facet name="header">
@@ -113,21 +46,13 @@
                     </f:facet>
                     <h:outputText value="#{item.autorizado}"/>
                 </p:column>
-                <p:column sortBy="#{item.fechautorizado}" filterBy="#{item.fechautorizado}">
+                 <p:column sortBy="#{item.autorizada}" filterBy="#{item.autorizada}">
                     <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_fechautorizado}"/>
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_autorizada}"/>
                     </f:facet>
-                    <h:outputText value="#{item.fechautorizado}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
+                    <h:outputText value="#{item.autorizada}"/>
                 </p:column>
-                <p:column sortBy="#{item.atendio}" filterBy="#{item.atendio}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_atendio}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.atendio}"/>
-                </p:column>
-                <p:column sortBy="#{item.anulado}" filterBy="#{item.anulado}">
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListOrdenencTitle_anulado}"/>
                     </f:facet>
@@ -138,93 +63,20 @@
                         <h:outputText value="#{myBundle.ListOrdenencTitle_fechaanulado}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaanulado}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
-                </p:column>
-                <p:column sortBy="#{item.numReq}" filterBy="#{item.numReq}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_numReq}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.numReq}"/>
-                </p:column>
-                <p:column sortBy="#{item.anio}" filterBy="#{item.anio}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_anio}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.anio}"/>
                 </p:column>
                 <p:column sortBy="#{item.coddeptoSol}" filterBy="#{item.coddeptoSol}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListOrdenencTitle_coddeptoSol}"/>
                     </f:facet>
-                    <h:outputText value="#{item.coddeptoSol}"/>
-                </p:column>
-                <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_usuario}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.usuario}"/>
-                </p:column>
-                <p:column sortBy="#{item.fechaIng}" filterBy="#{item.fechaIng}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_fechaIng}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.fechaIng}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                </p:column>
-                <p:column sortBy="#{item.autorizada}" filterBy="#{item.autorizada}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_autorizada}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.autorizada}"/>
-                </p:column>
-                <p:column sortBy="#{item.codCat}" filterBy="#{item.codCat}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_codCat}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.codCat}"/>
-                </p:column>
-                <p:column sortBy="#{item.tipoOrden}" filterBy="#{item.tipoOrden}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_tipoOrden}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.tipoOrden}"/>
-                </p:column>
-                <p:column sortBy="#{item.zapateria}" filterBy="#{item.zapateria}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_zapateria}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.zapateria}"/>
-                </p:column>
-                <p:column sortBy="#{item.planta}" filterBy="#{item.planta}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_planta}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.planta}"/>
-                </p:column>
-                <p:column sortBy="#{item.createdAt}" filterBy="#{item.createdAt}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_createdAt}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.createdAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                </p:column>
-                <p:column sortBy="#{item.updatedAt}" filterBy="#{item.updatedAt}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListOrdenencTitle_updatedAt}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.updatedAt}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
+                    <h:outputText value="#{item.departamentos.nomDepto}"/>
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{ordenencController.prepareCreate}" update=":OrdenencCreateForm" oncomplete="OrdenencCreateDialog.show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":OrdenencViewForm" oncomplete="OrdenencViewDialog.show()" disabled="#{empty ordenencController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":OrdenencEditForm" oncomplete="OrdenencEditDialog.show()" disabled="#{empty ordenencController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{ordenencController.delete}" update=":growl,datalist" disabled="#{empty ordenencController.selected}"/>
+                        <p:commandButton id="viewButtondet"   icon="ui-icon ui-icon-newwin" value="#{myBundle.Viewdet}" update=":OrdenencViewForm" oncomplete="OrdenencViewDialog.show()" disabled="#{empty ordenencController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon ui-icon-trash" value="#{myBundle.EditAnular}" update=":OrdenencEditForm" oncomplete="OrdenencEditDialog.show()" disabled="#{empty ordenencController.selected}"/>
                     </div>
                 </f:facet>
 
