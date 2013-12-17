@@ -2,6 +2,7 @@ package com.entities;
 
 
 import com.ejb.SB_RequisicionBMP;
+import com.entities.util.JsfUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -22,6 +23,8 @@ import javax.faces.event.ActionEvent;
 @ViewScoped
 
 public class OrdenencController extends AbstractController<Ordenenc> implements Serializable {
+    @EJB
+    private DetordenFacade detordenFacade;
     @EJB
     private SB_RequisicionBMP sB_RequisicionBMP;
 
@@ -44,6 +47,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
 
     Detorden DetalleRequisicion;
     List <Detorden> detorden ;
+    List <Detorden> listDetorden;
     
   
     
@@ -83,7 +87,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.getSelected().setStatus("D");
             this.getSelected().setVia("L");
             this.getSelected().setUsuario(lb.ssuser());
-            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49161",codCia));
+            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49166",codCia));
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -97,6 +101,26 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.DetalleRequisicion = DetalleRequisicion;
     }
 
+    /* public List<Detorden> getDetorden() {
+    if(this.getSelected()!=null ){
+    this.setDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));
+    return detorden;
+    }
+    return detorden;
+    }*/
+    public List<Detorden> getListDetorden() {
+         if(this.getSelected()!=null ){
+            this.setDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));
+            return listDetorden;
+        }
+        return listDetorden;
+    }
+  
+     public void setListDetorden(List<Detorden> listDetorden) {
+        this.listDetorden = listDetorden;
+    }
+    
+    
     public List<Detorden> getDetorden() {
         return detorden;
     }
@@ -178,7 +202,8 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.DetalleRequisicion.setPreciouni(this.DetalleRequisicion.getProductos().getCosto());
             this.DetalleRequisicion.setFecharequerido(this.getSelected().getFechaOrden());
             this.DetalleRequisicion.setRecibido("G");
-            this.getDetorden().add(this.getDetalleRequisicion());      
+            this.getDetorden().add(this.getDetalleRequisicion());   
+            JsfUtil.addSuccessMessage("Producto Agregado Correctamente");
        }catch(Exception ex){
            ex.toString();
        }
@@ -189,17 +214,24 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     public void deleteDetalleRequisicion(Detorden SelectDetOrden){
         try{
            this.getDetorden().remove(SelectDetOrden);
+           JsfUtil.addSuccessMessage("Producto Eliminado Correctamente");
         }catch(Exception ex){
             ex.printStackTrace();
         }
     }
     
     public void saveNewRequisicion(){
+        String msg ="";
         this.getSelected().setCodCat(this.getSelected().getCategorias().getCategoriasPK().getCodCat());
-        sB_RequisicionBMP.insertarRequisicion(this.getSelected(), this.getDetorden());
+        msg = sB_RequisicionBMP.insertarRequisicion(this.getSelected(), this.getDetorden());
+        JsfUtil.addSuccessMessage(msg);
     }
     
-    
+    public void AnularReq(){
+        String msg="";
+        msg = sB_RequisicionBMP.AnularRequisicion(this.getSelected());
+        JsfUtil.addSuccessMessage( msg);
+    }
     
     
 }

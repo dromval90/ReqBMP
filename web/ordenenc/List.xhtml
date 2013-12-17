@@ -17,8 +17,8 @@
                          rows="10"
                          rowsPerPageTemplate="10,20,30">
 
-                <p:ajax event="rowSelect"   update="viewButton editButton viewButtondet"/>
-                <p:ajax event="rowUnselect" update="viewButton editButton viewButtondet"/>
+                <p:ajax event="rowSelect"   update="viewButton editButton"/>
+                <p:ajax event="rowUnselect" update="viewButton editButton"/>
 
                 <p:column sortBy="#{item.ordenencPK.numOrden}" filterBy="#{item.ordenencPK.numOrden}">
                     <f:facet name="header">
@@ -74,8 +74,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":OrdenencViewForm" oncomplete="OrdenencViewDialog.show()" disabled="#{empty ordenencController.selected}"/>
-                        <p:commandButton id="viewButtondet"   icon="ui-icon ui-icon-newwin" value="#{myBundle.Viewdet}" update=":OrdenencViewForm" oncomplete="OrdenencViewDialog.show()" disabled="#{empty ordenencController.selected}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon ui-icon-newwin" value="#{myBundle.Viewdet}" update=":OrdenencViewForm" oncomplete="OrdenencViewDialog.show()" disabled="#{empty ordenencController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon ui-icon-trash" value="#{myBundle.EditAnular}" update=":OrdenencEditForm" oncomplete="OrdenencEditDialog.show()" disabled="#{empty ordenencController.selected}"/>
                     </div>
                 </f:facet>

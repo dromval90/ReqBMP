@@ -44,24 +44,10 @@
     <security-constraint>
         <display-name>Constraint1</display-name>
         <web-resource-collection>
-            <web-resource-name>empleados</web-resource-name>
-            <description/>
-            <url-pattern>/faces/empleados/*</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
             <web-resource-name>ordenenc</web-resource-name>
             <description/>
             <url-pattern>/faces/ordenenc/*</url-pattern>
         </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>detorden</web-resource-name>
-            <description/>
-            <url-pattern>/faces/detorden/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>PROGRAMADOR2</role-name>
-        </auth-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>

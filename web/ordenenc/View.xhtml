@@ -18,37 +18,14 @@
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_ordenencPK_numOrden}"/>
                         <h:outputText value="#{ordenencController.selected.ordenencPK.numOrden}" title="#{myBundle.ViewOrdenencTitle_ordenencPK_numOrden}"/>
 
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_ordenencPK_codCia}"/>
-                        <h:outputText value="#{ordenencController.selected.ordenencPK.codCia}" title="#{myBundle.ViewOrdenencTitle_ordenencPK_codCia}"/>
-
+                      
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_fechaOrden}"/>
                         <h:outputText value="#{ordenencController.selected.fechaOrden}" title="#{myBundle.ViewOrdenencTitle_fechaOrden}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
 
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_codigoGrupo}"/>
-                        <h:outputText value="#{ordenencController.selected.codigoGrupo}" title="#{myBundle.ViewOrdenencTitle_codigoGrupo}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_codEmp}"/>
-                        <h:outputText value="#{ordenencController.selected.codEmp}" title="#{myBundle.ViewOrdenencTitle_codEmp}"/>
-
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_solicitante}"/>
-                        <h:outputText value="#{ordenencController.selected.solicitante}" title="#{myBundle.ViewOrdenencTitle_solicitante}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_numPedido}"/>
-                        <h:outputText value="#{ordenencController.selected.numPedido}" title="#{myBundle.ViewOrdenencTitle_numPedido}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_codProv}"/>
-                        <h:outputText value="#{ordenencController.selected.codProv}" title="#{myBundle.ViewOrdenencTitle_codProv}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_formaPago}"/>
-                        <h:outputText value="#{ordenencController.selected.formaPago}" title="#{myBundle.ViewOrdenencTitle_formaPago}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_via}"/>
-                        <h:outputText value="#{ordenencController.selected.via}" title="#{myBundle.ViewOrdenencTitle_via}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_numDias}"/>
-                        <h:outputText value="#{ordenencController.selected.numDias}" title="#{myBundle.ViewOrdenencTitle_numDias}"/>
+                        <h:outputText value="#{ordenencController.selected.empleados2.nombreIsss}" title="#{myBundle.ViewOrdenencTitle_solicitante}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_observaciones}"/>
                         <h:outputText value="#{ordenencController.selected.observaciones}" title="#{myBundle.ViewOrdenencTitle_observaciones}"/>
@@ -56,69 +33,37 @@
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_proyecto}"/>
                         <h:outputText value="#{ordenencController.selected.proyecto}" title="#{myBundle.ViewOrdenencTitle_proyecto}"/>
 
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_status}"/>
-                        <h:outputText value="#{ordenencController.selected.status}" title="#{myBundle.ViewOrdenencTitle_status}"/>
-
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_autorizado}"/>
                         <h:outputText value="#{ordenencController.selected.autorizado}" title="#{myBundle.ViewOrdenencTitle_autorizado}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_fechautorizado}"/>
                         <h:outputText value="#{ordenencController.selected.fechautorizado}" title="#{myBundle.ViewOrdenencTitle_fechautorizado}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_atendio}"/>
-                        <h:outputText value="#{ordenencController.selected.atendio}" title="#{myBundle.ViewOrdenencTitle_atendio}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_anulado}"/>
                         <h:outputText value="#{ordenencController.selected.anulado}" title="#{myBundle.ViewOrdenencTitle_anulado}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_fechaanulado}"/>
                         <h:outputText value="#{ordenencController.selected.fechaanulado}" title="#{myBundle.ViewOrdenencTitle_fechaanulado}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_numReq}"/>
-                        <h:outputText value="#{ordenencController.selected.numReq}" title="#{myBundle.ViewOrdenencTitle_numReq}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_anio}"/>
-                        <h:outputText value="#{ordenencController.selected.anio}" title="#{myBundle.ViewOrdenencTitle_anio}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_coddeptoSol}"/>
-                        <h:outputText value="#{ordenencController.selected.coddeptoSol}" title="#{myBundle.ViewOrdenencTitle_coddeptoSol}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_usuario}"/>
-                        <h:outputText value="#{ordenencController.selected.usuario}" title="#{myBundle.ViewOrdenencTitle_usuario}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_fechaIng}"/>
-                        <h:outputText value="#{ordenencController.selected.fechaIng}" title="#{myBundle.ViewOrdenencTitle_fechaIng}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                        <h:outputText value="#{ordenencController.selected.departamentos.nomDepto}" title="#{myBundle.ViewOrdenencTitle_coddeptoSol}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_autorizada}"/>
                         <h:outputText value="#{ordenencController.selected.autorizada}" title="#{myBundle.ViewOrdenencTitle_autorizada}"/>
 
                         <h:outputText value="#{myBundle.ViewOrdenencLabel_codCat}"/>
-                        <h:outputText value="#{ordenencController.selected.codCat}" title="#{myBundle.ViewOrdenencTitle_codCat}"/>
+                        <h:outputText value="#{ordenencController.selected.categorias.nomCat}" title="#{myBundle.ViewOrdenencTitle_codCat}"/>
 
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_tipoOrden}"/>
-                        <h:outputText value="#{ordenencController.selected.tipoOrden}" title="#{myBundle.ViewOrdenencTitle_tipoOrden}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_zapateria}"/>
-                        <h:outputText value="#{ordenencController.selected.zapateria}" title="#{myBundle.ViewOrdenencTitle_zapateria}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_planta}"/>
-                        <h:outputText value="#{ordenencController.selected.planta}" title="#{myBundle.ViewOrdenencTitle_planta}"/>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_createdAt}"/>
-                        <h:outputText value="#{ordenencController.selected.createdAt}" title="#{myBundle.ViewOrdenencTitle_createdAt}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-
-                        <h:outputText value="#{myBundle.ViewOrdenencLabel_updatedAt}"/>
-                        <h:outputText value="#{ordenencController.selected.updatedAt}" title="#{myBundle.ViewOrdenencTitle_updatedAt}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                        
+                        <h3>Detalle Requisicion</h3>  
+                        <p:dataList value="#{ordenencController.listDetorden}" var="ldetorden" itemType="circle">  
+                            #{ldetorden.detordenPK.codProd} || #{ldetorden.productos.nombre} || #{ldetorden.unidades.descripcion} || #{ldetorden.cantidad}
+                        </p:dataList>       
+                      
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="OrdenencViewDialog.hide()"/>
                 </h:panelGroup>

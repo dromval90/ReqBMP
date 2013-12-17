@@ -4,9 +4,11 @@
  */
 package com.entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,6 +26,18 @@ public class DocumentoFacade extends AbstractFacade<Documento> {
 
     public DocumentoFacade() {
         super(Documento.class);
+    }
+    
+    public List<Documento>findByNumDocto(short codCia, String numDocumento, short codDepto, String CodTipoDoc){
+	 TypedQuery<Documento> q;
+	
+		 q = em.createNamedQuery("Documento.findByNumDocto", Documento.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("numDocto",  numDocumento )
+                    .setParameter("codDepto",  codDepto )
+                    .setParameter("codTipoDocto",  CodTipoDoc );
+         return q.getResultList();
+    
     }
     
 }

@@ -27,7 +27,7 @@
                         </p:selectOneMenu>
                             
                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_codigoUnidad}" for="codigoUnidad" />
-                        <p:selectOneMenu filter="true" id="codigoUnidad" value="#{ordenencController.detalleRequisicion.unidades}">
+                        <p:selectOneMenu filter="true" id="codigoUnidad" value="#{ordenencController.detalleRequisicion.unidades}" required="true" requiredMessage="#{myBundle.CreateunidadesRequieredMessage}">
                             <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
                             <f:selectItems value="#{unidadesController.items}"
                                            var="unidadesItem"                                        
@@ -37,7 +37,7 @@
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_cantidad}" for="cantidad" />
-                        <p:inputText id="cantidad" value="#{ordenencController.detalleRequisicion.cantidad}" title="#{myBundle.CreateDetordenTitle_cantidad}"/>
+                        <p:inputText id="cantidad" value="#{ordenencController.detalleRequisicion.cantidad}" title="#{myBundle.CreateDetordenTitle_cantidad}" required="true" requiredMessage="#{myBundle.CreatecantidadRequieredMessage}"/>
 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ordenencController.addDetalleRequisicion}" value="#{myBundle.Save}" update="display,:DetordenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenCreateDialog);" process="@form"/>

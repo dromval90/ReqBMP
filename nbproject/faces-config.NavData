@@ -5,10 +5,11 @@
         <Node id="template.xhtml" x="650" y="450" zoom="true"/>
         <Node id="ordenenc/Create.xhtml" x="150" y="450" zoom="true"/>
         <Node id="ordenenc/List.xhtml" x="1150" y="150" zoom="true"/>
-        <Node id="appmenu.xhtml" x="400" y="450" zoom="true"/>
         <Node id="ordenenc/index.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="appmenu.xhtml" x="400" y="450" zoom="true"/>
         <Node id="detorden/View.xhtml" x="650" y="150" zoom="true"/>
         <Node id="detorden/Edit.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="ordenenclist/index.xhtml" x="150" y="750" zoom="true"/>
         <Node id="detorden/Create.xhtml" x="400" y="600" zoom="true"/>
         <Node id="ordenenc/View.xhtml" x="900" y="300" zoom="true"/>
         <Node id="detorden/List.xhtml" x="400" y="150" zoom="true"/>

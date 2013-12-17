@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detorden.findAll", query = "SELECT d FROM Detorden d"),
-    @NamedQuery(name = "Detorden.findByNumOrden", query = "SELECT d FROM Detorden d WHERE d.detordenPK.numOrden = :numOrden"),
+    @NamedQuery(name = "Detorden.findByNumOrden", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codCia = :codCia and d.detordenPK.numOrden = :numOrden"),
     @NamedQuery(name = "Detorden.findByCodCia", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codCia = :codCia"),
     @NamedQuery(name = "Detorden.findByCodProd", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codProd = :codProd"),
     @NamedQuery(name = "Detorden.findByNombre", query = "SELECT d FROM Detorden d WHERE d.nombre = :nombre"),

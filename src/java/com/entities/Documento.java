@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Documento.findAll", query = "SELECT d FROM Documento d"),
+    @NamedQuery(name = "Documento.findByNumDocto", query = "SELECT d FROM Documento d WHERE d.documentoPK.codCia = :codCia and d.documentoPK.numDocto = :numDocto and d.documentoPK.codDepto = :codDepto and d.documentoPK.codTipoDocto = :codTipoDocto"),
     @NamedQuery(name = "Documento.findByCodCia", query = "SELECT d FROM Documento d WHERE d.documentoPK.codCia = :codCia"),
     @NamedQuery(name = "Documento.findByCodDepto", query = "SELECT d FROM Documento d WHERE d.documentoPK.codDepto = :codDepto"),
     @NamedQuery(name = "Documento.findByCodTipoDocto", query = "SELECT d FROM Documento d WHERE d.documentoPK.codTipoDocto = :codTipoDocto"),
-    @NamedQuery(name = "Documento.findByNumDocto", query = "SELECT d FROM Documento d WHERE d.documentoPK.numDocto = :numDocto"),
     @NamedQuery(name = "Documento.findByNumCaso", query = "SELECT d FROM Documento d WHERE d.documentoPK.numCaso = :numCaso"),
     @NamedQuery(name = "Documento.findByFechaDocto", query = "SELECT d FROM Documento d WHERE d.fechaDocto = :fechaDocto"),
     @NamedQuery(name = "Documento.findByStatusDocto", query = "SELECT d FROM Documento d WHERE d.statusDocto = :statusDocto"),

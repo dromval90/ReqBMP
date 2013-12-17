@@ -40,5 +40,15 @@ public class DetordenFacade extends AbstractFacade<Detorden> {
          return q.getResultList();
     
     }
+ 
+    public List<Detorden> findNumOrden(short codCia, String numOrden){
+	 TypedQuery<Detorden> q;
+	
+		 q = em.createNamedQuery("Detorden.findByNumOrden", Detorden.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("numOrden",  numOrden );
+         return q.getResultList();
+    
+    }
     
 }
