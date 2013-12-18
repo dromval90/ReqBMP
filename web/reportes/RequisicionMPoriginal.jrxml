@@ -28,7 +28,7 @@
 	</style>
 	<subDataset name="Table Dataset 1" uuid="88ce899c-7a96-4fce-89ac-1aec10c881cc"/>
 	<subDataset name="Table Dataset 2" uuid="0440ad0d-caaa-46dd-b1a8-50f1d7a81568"/>
-	<parameter name="codCia" class="java.math.BigDecimal">
+	<parameter name="codCia" class="java.lang.Short">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="numOrden" class="java.lang.String">

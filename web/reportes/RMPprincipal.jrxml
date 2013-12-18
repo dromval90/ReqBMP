@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="559464b0-e16c-43cf-a87d-3c3ffe1610b7">
-	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.zoom" value="1.7715610000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="196"/>
-	<parameter name="codCia" class="java.math.BigDecimal">
+	<property name="ireport.y" value="120"/>
+	<parameter name="codCia" class="java.lang.Short">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="numOrden" class="java.lang.String">
@@ -68,16 +68,18 @@
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/dromero/NetBeansProjects/RequisicionBMP/web/reportes/RequisicionMPoriginal.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="28">
 			<line>
-				<reportElement x="5" y="247" width="550" height="1" uuid="bb2b6b52-99af-4a03-a917-c7c45b982d89"/>
+				<reportElement x="3" y="14" width="550" height="1" uuid="bb2b6b52-99af-4a03-a917-c7c45b982d89"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 		</band>
-		<band height="234">
+		<band height="255">
 			<subreport>
-				<reportElement x="3" y="4" width="550" height="225" uuid="4df6ba0f-7899-44c4-a49c-89f641162ccc"/>
+				<reportElement x="2" y="6" width="550" height="225" uuid="4df6ba0f-7899-44c4-a49c-89f641162ccc"/>
 				<subreportParameter name="codCia">
 					<subreportParameterExpression><![CDATA[$P{codCia}]]></subreportParameterExpression>
 				</subreportParameter>

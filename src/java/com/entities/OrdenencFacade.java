@@ -47,7 +47,23 @@ public class OrdenencFacade extends AbstractFacade<Ordenenc> {
                
             
          return q.getResultList();
-        
+    }
+    
+    public List<Ordenenc> findDocAutorizados(){
+         TypedQuery<Ordenenc> q=null;
+        try{
+            LoginBean lb= new LoginBean();	
+	    short codCia = lb.sscia();
+		 q = em.createNamedQuery("Ordenenc.findDocAutorizados", Ordenenc.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("tipoOrden", "P")
+                    .setParameter("status",  "'A','C'" );
+                
+            return q.getResultList();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return q.getResultList();
     
     }
     

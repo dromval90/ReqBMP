@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="OrdenencListForm">
+
+        <p:panel header="#{myBundle.ListOrdenencTitle}">
+
+            <p:dataTable id="datalist" value="#{ordenencController.listOrdenenc}" var="item"
+                         selectionMode="single" selection="#{ordenencController.selected}"
+                         rowKey="#{item.ordenencPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30">
+
+                <p:ajax event="rowSelect"   update="viewprint"/>
+                <p:ajax event="rowUnselect" update="viewprint"/>
+
+                <p:column sortBy="#{item.ordenencPK.numOrden}" filterBy="#{item.ordenencPK.numOrden}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_ordenencPK_numOrden}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ordenencPK.numOrden}"/>
+                </p:column>
+                <p:column sortBy="#{item.fechaOrden}" filterBy="#{item.fechaOrden}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_fechaOrden}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaOrden}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.solicitante}" filterBy="#{item.solicitante}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_solicitante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.empleados2.nombreIsss}"/>
+                </p:column>
+                <p:column sortBy="#{item.autorizado}" filterBy="#{item.autorizado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_autorizado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.autorizado}"/>
+                </p:column>
+                 <p:column sortBy="#{item.autorizada}" filterBy="#{item.autorizada}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_autorizada}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.autorizada}"/>
+                </p:column>
+                 <p:column sortBy="#{item.fechautorizado}" filterBy="#{item.fechautorizado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_fechautorizado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechautorizado}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.coddeptoSol}" filterBy="#{item.coddeptoSol}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenencTitle_coddeptoSol}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.departamentos.nomDepto}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="viewprint"   icon="ui-icon ui-icon-print" actionListener="#{ordenencController.imprimirRequisicion}" ajax="false" value="#{myBundle.Viewprint}"   disabled="#{empty ordenencController.selected}"/>
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

@@ -1,14 +1,18 @@
 package com.entities;
 
 
+import com.ejb.SB_Reportes;
 import com.ejb.SB_RequisicionBMP;
 import com.entities.util.JsfUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,11 +22,15 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.naming.NamingException;
+import net.sf.jasperreports.engine.JRException;
 
 @ManagedBean(name = "ordenencController")
 @ViewScoped
 
 public class OrdenencController extends AbstractController<Ordenenc> implements Serializable {
+    @EJB
+    private SB_Reportes reportes;
     @EJB
     private DetordenFacade detordenFacade;
     @EJB
@@ -44,11 +52,10 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     
     
     List <Productos> CatxProd;
-
     Detorden DetalleRequisicion;
     List <Detorden> detorden ;
     List <Detorden> listDetorden;
-    
+    List<Ordenenc> listOrdenenc;
   
     
     public OrdenencController() {
@@ -110,7 +117,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     }*/
     public List<Detorden> getListDetorden() {
          if(this.getSelected()!=null ){
-            this.setDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));
+            this.setListDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));
             return listDetorden;
         }
         return listDetorden;
@@ -160,7 +167,17 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     public void setEjbFacade(OrdenencFacade ejbFacade) {
         this.ejbFacade = ejbFacade;
     }
+
+    public List<Ordenenc> getListOrdenenc() {
+        this.setListOrdenenc(ejbFacade.findDocAutorizados());
+        return listOrdenenc;
+    }
+
+    public void setListOrdenenc(List<Ordenenc> listOrdenenc) {
+        this.listOrdenenc = listOrdenenc;
+    }
        
+    
 
     public List<Productos> getCatxProd() {
         try{
@@ -231,6 +248,19 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         String msg="";
         msg = sB_RequisicionBMP.AnularRequisicion(this.getSelected());
         JsfUtil.addSuccessMessage( msg);
+    }
+    
+    public String imprimirRequisicion() throws NamingException, SQLException, JRException, IOException{
+        //try{
+            HashMap params = new HashMap();  
+            
+            params.put("codCia", this.getSelected().getOrdenencPK().getCodCia()); 
+            params.put("numOrden",this.getSelected().getOrdenencPK().getNumOrden() );
+            reportes.GenerarReporte("/reportes/RMPprincipal.jasper", params);    
+        /*}catch(Exception ex){
+            ex.printStackTrace();
+        }    */
+        return "";
     }
     
     
