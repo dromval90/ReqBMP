@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemplateRmpEditDlg" widgetVar="TemplateRmpEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.EditTemplateRmpTitle}" closeOnEscape="true">
+
+            <h:form id="TemplateRmpEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{templateRmpController.selected != null}">
+
+                        <h:outputLabel value="#{myBundle.EditTemplateRmpLabel_templateRmpPK_codCia}" for="templateRmpPK_codCia" />
+                        <h:outputText id="templateRmpPK_codCia" value="#{templateRmpController.selected.templateRmpPK.codCia}" />
+
+                        <h:outputLabel value="#{myBundle.EditTemplateRmpLabel_templateRmpPK_codProd}" for="templateRmpPK_codProd" />
+                        <h:outputText id="templateRmpPK_codProd" value="#{templateRmpController.selected.templateRmpPK.codProd}" />
+
+                        <p:outputLabel value="#{myBundle.EditTemplateRmpLabel_nombreProdTemplate}" for="nombreProdTemplate" />
+                        <p:inputText id="nombreProdTemplate" value="#{templateRmpController.selected.nombreProdTemplate}" title="#{myBundle.EditTemplateRmpTitle_nombreProdTemplate}" size="200" maxlength="200"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{templateRmpController.save}" value="#{myBundle.Save}" update="display,:TemplateRmpListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TemplateRmpEditDialog);"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="TemplateRmpEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

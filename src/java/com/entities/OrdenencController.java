@@ -35,15 +35,12 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     private DetordenFacade detordenFacade;
     @EJB
     private SB_RequisicionBMP sB_RequisicionBMP;
-
     @EJB
     private CategoriasFacade categoriasFacade;
     @EJB
     private EmpleadosFacade empleadosFacade;
-   
     @EJB
     private ProductosFacade productosFacade;
-
     @EJB
     private OrdenencFacade ejbFacade;
     
@@ -108,13 +105,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.DetalleRequisicion = DetalleRequisicion;
     }
 
-    /* public List<Detorden> getDetorden() {
-    if(this.getSelected()!=null ){
-    this.setDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));
-    return detorden;
-    }
-    return detorden;
-    }*/
+
     public List<Detorden> getListDetorden() {
          if(this.getSelected()!=null ){
             this.setListDetorden(detordenFacade.findNumOrden(this.getSelected().getOrdenencPK().getCodCia(), this.getSelected().getOrdenencPK().getNumOrden()));

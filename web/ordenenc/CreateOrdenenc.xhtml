@@ -5,9 +5,9 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
-    
-     <h:form id="OrdenencCreateForm">
-
+   
+     
+    <h:form id="OrdenencCreateForm">
          <h:panelGroup id="display">
                     <p:panelGrid columns="4" style="margin: 0 auto;">
                         <f:facet name="header">
@@ -102,6 +102,36 @@
             </p:dataTable>
 
         </p:panel>
+        <br/><br/><br/>        
+        <p:panel header="Plantilla Solicitud Requisicion" toggleable="true" toggleOrientation="horizontal" style="float:bottom">  
+            <p:dataTable id="datalisttemplate" value="#{templateRmpController.items}" var="itemtemplate"
+                         selectionMode="single" selection="#{templateRmpController.selected}"
+                         rowKey="#{itemtemplate.templateRmpPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_templateRmpPK_codProd}"/>
+                    </f:facet>
+                    <h:outputText value="#{itemtemplate.templateRmpPK.codProd}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_nombreProdTemplate}"/>
+                    </f:facet>
+                    <h:outputText value="#{itemtemplate.nombreProdTemplate}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDetordenTitle_codigoUnidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{itemtemplate.unidades.descripcion}"/>
+                </p:column>
+
+            </p:dataTable>
+        </p:panel>  
 
     </h:form>
    

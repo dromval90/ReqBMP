@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="TemplateRmpListForm">
+
+        <p:panel header="#{myBundle.ListTemplateRmpTitle}">
+
+            <p:dataTable id="datalist" value="#{templateRmpController.items}" var="item"
+                         selectionMode="single" selection="#{templateRmpController.selected}"
+                         rowKey="#{item.templateRmpPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.templateRmpPK.codCia}" filterBy="#{item.templateRmpPK.codCia}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_templateRmpPK_codCia}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.templateRmpPK.codCia}"/>
+                </p:column>
+                <p:column sortBy="#{item.templateRmpPK.codProd}" filterBy="#{item.templateRmpPK.codProd}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_templateRmpPK_codProd}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.templateRmpPK.codProd}"/>
+                </p:column>
+                <p:column sortBy="#{item.nombreProdTemplate}" filterBy="#{item.nombreProdTemplate}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_nombreProdTemplate}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombreProdTemplate}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{templateRmpController.prepareCreate}" update=":TemplateRmpCreateForm" oncomplete="TemplateRmpCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":TemplateRmpViewForm" oncomplete="TemplateRmpViewDialog.show()" disabled="#{empty templateRmpController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":TemplateRmpEditForm" oncomplete="TemplateRmpEditDialog.show()" disabled="#{empty templateRmpController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{templateRmpController.delete}" update=":growl,datalist" disabled="#{empty templateRmpController.selected}"/>
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

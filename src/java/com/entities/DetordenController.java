@@ -18,6 +18,10 @@ public class DetordenController extends AbstractController<Detorden> implements 
     
     @EJB
     private DetordenFacade ejbFacade;
+    
+    List<Detorden> ListDetorden;
+    
+    String numOrden;
 
     public DetordenController() {
         super(Detorden.class);
@@ -45,10 +49,37 @@ public class DetordenController extends AbstractController<Detorden> implements 
 
     }
     
-    public String fun(){
-   return "Hola Mundo";
+    public List<Detorden> getListDetorden() {
+            return ListDetorden;
     }
-  
+
+    public void setListDetorden(List<Detorden> ListDetorden) {
+        this.ListDetorden = ListDetorden;
+    }
+
+    public String getNumOrden() {
+        return numOrden;
+    }
+
+    public void setNumOrden(String numOrden) {
+        this.numOrden = numOrden;
+    }
+    
+    public void BuscarRequesicion(){
+        try{
+            if(numOrden != null && !(numOrden.equals(""))){
+                LoginBean lb= new LoginBean();	
+                short codCia = lb.sscia();
+                this.setListDetorden(ejbFacade.findNumOrden(codCia, numOrden));
+                this.getListDetorden();
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+       
+    }
+    
+    
     
     
     

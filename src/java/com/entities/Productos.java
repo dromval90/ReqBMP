@@ -278,6 +278,9 @@ public class Productos implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productos")
     private List<Detorden> detordenList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productos")
+    private List<TemplateRmp> templatermpList;
 
     public Productos() {
     }
@@ -898,6 +901,15 @@ public class Productos implements Serializable {
     public void setCodCat(String codCat) {
         this.codCat = codCat;
     }
+
+    public List<TemplateRmp> getTemplatermpList() {
+        return templatermpList;
+    }
+
+    public void setTemplatermpList(List<TemplateRmp> templatermpList) {
+        this.templatermpList = templatermpList;
+    }
+    
     
     
     

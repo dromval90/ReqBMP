@@ -30,11 +30,7 @@ public class DetordenFacade extends AbstractFacade<Detorden> {
     
  @Override
     public List<Detorden> findAll(){
-	 TypedQuery<Detorden> q;
-	 
-	    LoginBean lb= new LoginBean();	
-	    short codCia = lb.sscia();
-	
+	 TypedQuery<Detorden> q;	
 		 q = em.createNamedQuery("Detorden.findByCodCia", Detorden.class )		    
 		    .setParameter("codCia",  0 );
          return q.getResultList();
@@ -50,5 +46,7 @@ public class DetordenFacade extends AbstractFacade<Detorden> {
          return q.getResultList();
     
     }
+    
+   
     
 }
