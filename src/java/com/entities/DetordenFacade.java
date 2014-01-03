@@ -47,6 +47,17 @@ public class DetordenFacade extends AbstractFacade<Detorden> {
     
     }
     
+    /*public List<Detorden> findDocAutorizados(short codCia, String numOrden){
+	 TypedQuery<Detorden> q;             
+		 q = em.createNamedQuery("Detorden.findDocAutorizados", Detorden.class )		    
+		    .setParameter("codCia",  codCia )
+                    .setParameter("tipoOrden", "P")
+                    .setParameter("status",  "'A','C'" )
+                    .setParameter("numOrden",  numOrden );
+
+         return q.getResultList();
+    
+    }*/
    
     
 }

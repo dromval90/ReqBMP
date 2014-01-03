@@ -35,8 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ordenenc.findAll", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia and o.tipoOrden = :tipoOrden and o.coddeptoSol = :coddeptoSol"),
-    @NamedQuery(name = "Ordenenc.findByNumOrden", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.numOrden = :numOrden"),
+    @NamedQuery(name = "Ordenenc.findByNumOrden", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia and o.ordenencPK.numOrden = :numOrden"),
     @NamedQuery(name = "Ordenenc.findDocAutorizados", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia and o.tipoOrden = :tipoOrden and o.autorizado is not null and o.fechautorizado is not null and o.anulado is null and o.fechaanulado is null and o.status not in(:status)"),
+    @NamedQuery(name = "Ordenenc.findOrdenAutorizados", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia and o.ordenencPK.numOrden = :numOrden and o.tipoOrden = :tipoOrden and o.autorizado is not null and o.fechautorizado is not null and o.anulado is null and o.fechaanulado is null and o.status not in(:status)"),
     @NamedQuery(name = "Ordenenc.findByFechaOrden", query = "SELECT o FROM Ordenenc o WHERE o.fechaOrden = :fechaOrden"),
     @NamedQuery(name = "Ordenenc.findByCodCia", query = "SELECT o FROM Ordenenc o WHERE o.ordenencPK.codCia = :codCia"),
     @NamedQuery(name = "Ordenenc.findByCodigoGrupo", query = "SELECT o FROM Ordenenc o WHERE o.codigoGrupo = :codigoGrupo"),

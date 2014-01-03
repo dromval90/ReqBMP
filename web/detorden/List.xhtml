@@ -10,13 +10,14 @@
         
     
     <h:form id="DetordenListForm">
+        <h:panelGroup id="display">
         <p:panel header="#{myBundle.ListDetordenSurtidoTitle}">
                 <div style="margin: 0 auto; text-align: center;">
                     <p:panelGrid columns="4" style="margin: 0 auto;">
                            <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
                            <p:inputText id="ordenencPK_numOrden" value="#{detordenController.numOrden}" title="#{myBundle.CreateOrdenencTitle_ordenencPK_numOrden}" required="true" requiredMessage="#{myBundle.CreateOrdenencRequiredMessage_ordenencPK_numOrden}" size="10" maxlength="10"/>
                       <br/>
-                      <p:commandButton id="FindButton" icon="ui-icon ui-icon-search"   value="#{myBundle.FindReque}" actionListener="#{detordenController.BuscarRequesicion}" update="@form"/>
+                      <p:commandButton id="FindButton" icon="ui-icon ui-icon-search"   value="#{myBundle.FindReque}" actionListener="#{detordenController.BuscarRequesicion}" update="datalist, :growl "/>
                     </p:panelGrid>
                 </div>
             <p:dataTable id="datalist" value="#{detordenController.listDetorden}" var="item"
@@ -25,11 +26,12 @@
                          paginator="true"
                          rows="10"
                          rowsPerPageTemplate="10,20,30"
-                         >
-
-                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                          editable="true" editMode="cell">
+                
+                <p:ajax event="cellEdit" listener="#{detordenController.onCellEdit}" update="datalist , :growl" />  
+               
+                <p:ajax event="rowSelect"   update="btnsurtir"/>
+                <p:ajax event="rowUnselect" update="btnsurtir"/>
                 
                 <p:column sortBy="#{item.ordenenc.ordenencPK.numOrden}" filterBy="#{item.ordenenc.ordenencPK.numOrden}">
                     <f:facet name="header">
@@ -63,26 +65,30 @@
                     </f:facet>
                     <h:outputText value="#{item.cantidad}"/>
                 </p:column>
-                <p:column sortBy="#{item.preciouni}" filterBy="#{item.preciouni}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListDetordenTitle_preciouni}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.preciouni}"/>
-                </p:column>
-                <p:column sortBy="#{item.fechaSurtido}" filterBy="#{item.fechaSurtido}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListDetordenTitle_fechaSurtido}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.fechaSurtido}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputText>
-                </p:column>
-                <p:column sortBy="#{item.cantSurtida}" filterBy="#{item.cantSurtida}">
-                    <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListDetordenTitle_cantSurtida}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.cantSurtida}"/>
-                </p:column>
+               <p:column headerText="Fecha Surtido" style="width:8%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">
+                             <h:outputText  value="#{item.fechaSurtido}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                             </h:outputText>
+                        </f:facet>  
+                        <f:facet name="input">
+                            <p:inputText  value="#{item.fechaSurtido}" style="width:96%" label="Fecha Surtido" required="true" requiredMessage="#{myBundle.RequiredMessage_fechasurtido}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:inputText>
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
+                <p:column headerText="Cantidad Surtir" style="width:8%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">
+                             <h:outputText  value="#{item.cantSurtida}" />
+                        </f:facet>  
+                        <f:facet name="input">
+                            <p:inputText  value="#{item.cantSurtida}" style="width:96%" label="Cantidad Surtir" required="true" requiredMessage="#{myBundle.RequiredMessage_cantidadsurtido}"></p:inputText>
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column> 
                 <p:column sortBy="#{item.unidades.descripcion}" filterBy="#{item.unidades.descripcion}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListDetordenTitle_codigoUnidad}"/>
@@ -91,17 +97,14 @@
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{detordenController.prepareCreate}" update=":DetordenCreateForm" oncomplete="DetordenCreateDialog.show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":DetordenViewForm" oncomplete="DetordenViewDialog.show()" disabled="#{empty detordenController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":DetordenEditForm" oncomplete="DetordenEditDialog.show()" disabled="#{empty detordenController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{detordenController.delete}" update=":growl,datalist" disabled="#{empty detordenController.selected}"/>
+                        <p:commandButton id="btnsurtir"   icon="ui-icon ui-icon-suitcase" actionListener="#{detordenController.surtir}" value="#{myBundle.btnsurtir}"   disabled="#{empty detordenController.selected}" update=":growl"/>
                     </div>
                 </f:facet>
 
             </p:dataTable>
 
         </p:panel>
-
+      </h:panelGroup>
     </h:form>
 
 </ui:composition>

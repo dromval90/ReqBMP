@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="559464b0-e16c-43cf-a87d-3c3ffe1610b7">
 	<property name="ireport.zoom" value="1.7715610000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="120"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="codCia" class="java.lang.Short">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -58,12 +58,12 @@
 	<detail>
 		<band height="251" splitType="Stretch">
 			<subreport>
-				<reportElement x="3" y="4" width="550" height="225" uuid="bbc6df34-7661-4ad1-9a93-4e5a59bfdf7f"/>
+				<reportElement x="3" y="11" width="550" height="225" uuid="3b7e59f4-ce8b-4653-8a4b-a2cae9a8e7d4"/>
 				<subreportParameter name="codCia">
 					<subreportParameterExpression><![CDATA[$P{codCia}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="numOrden">
-					<subreportParameterExpression><![CDATA[$F{NUM_ORDEN}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$P{numOrden}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["/home/dromero/NetBeansProjects/RequisicionBMP/web/reportes/RequisicionMPoriginal.jasper"]]></subreportExpression>

@@ -182,5 +182,23 @@ public class SB_RequisicionBMP {
         }
         return msg;
     }
+    
+     public String surtirRequisicion(List<Detorden> DetalleReq){
+       String msg ="";
+       try{
+           
+           for(Detorden DetReq : DetalleReq){
+                detordenFacade.edit(DetReq);
+            }
+                     
+           msg+=" **Detalle Requisicion Almacenado Correctamente";
+           
+       }catch(Exception ex){
+           
+       }   
+       return msg;
+   }
+   
+    
 
 }

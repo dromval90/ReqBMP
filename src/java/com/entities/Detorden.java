@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Detorden.findAll", query = "SELECT d FROM Detorden d"),
     @NamedQuery(name = "Detorden.findByNumOrden", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codCia = :codCia and d.detordenPK.numOrden = :numOrden"),
+    //@NamedQuery(name = "Detorden.findDocAutorizados", query = "SELECT d FROM Ordenenc o inner join Detorden d on o.ordenencPK.codCia = d.detordenPK.codCia and o.ordenencPK.numOrden = d.detordenPK.numOrden WHERE o.ordenencPK.codCia = :codCia and o.tipoOrden = :tipoOrden and d.detordenPK.numOrden = :numOrden and o.autorizado is not null and o.fechautorizado is not null and o.anulado is null and o.fechaanulado is null and o.status not in(:status)"),
     @NamedQuery(name = "Detorden.findByCodCia", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codCia = :codCia"),
     @NamedQuery(name = "Detorden.findByCodProd", query = "SELECT d FROM Detorden d WHERE d.detordenPK.codProd = :codProd"),
     @NamedQuery(name = "Detorden.findByNombre", query = "SELECT d FROM Detorden d WHERE d.nombre = :nombre"),

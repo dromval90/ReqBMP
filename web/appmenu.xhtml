@@ -10,10 +10,15 @@
         <h:form id="menuForm">
             <p:menubar>
                 <p:menuitem value="#{myBundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                <p:submenu label="#{myBundle.Maintenance}">
+                 <p:submenu label="#{myBundle.Solicitudes}">
                     <p:menuitem value="Ingreso Req.BMP" outcome="/ordenenc/index" />
                     <p:menuitem value="Req. BMPxDepto" outcome="/ordenenclist/index" />
+                    <p:menuitem value="Recibir RMP" outcome="/ordenenclist/index" />
+                </p:submenu>
+                 <p:submenu label="#{myBundle.Impresion}">
                     <p:menuitem value="Impresion Req.BMP" outcome="/ordenencprint/index" />
+                </p:submenu>
+                <p:submenu label="#{myBundle.Surtido}">
                     <p:menuitem value="Surtir Req." outcome="/surtido/index" />
                 </p:submenu>
             </p:menubar>

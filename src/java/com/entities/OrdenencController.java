@@ -91,7 +91,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.getSelected().setStatus("D");
             this.getSelected().setVia("L");
             this.getSelected().setUsuario(lb.ssuser());
-            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49166",codCia));
+            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49170",codCia));
         }catch(Exception ex){
             ex.printStackTrace();
         }
