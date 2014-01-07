@@ -60,9 +60,12 @@ public class SB_RequisicionBMP {
        String msg ="";
        try{
            ordenencFacade.edit(EncOrden);
+       
            msg="**Encabezado Requisicion Almacenado Correctamente";
            for(Detorden DetReq : DetalleReq){
                 DetReq.setValorreq(DetReq.getCantidad().multiply(DetReq.getPreciouni()));
+                DetReq.getDetordenPK().setNumOrden(EncOrden.getOrdenencPK().getNumOrden());
+                DetReq.getOrdenenc().getOrdenencPK().setNumOrden(EncOrden.getOrdenencPK().getNumOrden());
                 detordenFacade.edit(DetReq);
             }
            msg+=" **Detalle Requisicion Almacenado Correctamente";
@@ -191,10 +194,45 @@ public class SB_RequisicionBMP {
                 detordenFacade.edit(DetReq);
             }
                      
-           msg+=" **Detalle Requisicion Almacenado Correctamente";
+           msg+=" **Requisicion Surtida";
            
        }catch(Exception ex){
            
+       }   
+       return msg;
+   }
+     
+    public String recibirRequisicion(List<Detorden> DetalleReq){
+       String msg ="";
+        List<Ordenenc> ListOrdenenc;
+        ListOrdenenc = new ArrayList<Ordenenc>();
+        double canRecibida=0, canSolicitada=0;
+        short codCia = 0;
+        String numOrden="";
+       try{
+           
+           for(Detorden DetReq : DetalleReq){
+                codCia = DetReq.getDetordenPK().getCodCia();
+                numOrden = DetReq.getDetordenPK().getNumOrden();
+                canRecibida =   DetReq.getCantidadRec().doubleValue();
+                canSolicitada = DetReq.getCalidad();
+                detordenFacade.edit(DetReq);
+            }
+           ListOrdenenc = ordenencFacade.findDocAutorizados(codCia, numOrden);
+           if(canRecibida == canSolicitada){
+               for(Ordenenc EncOrden : ListOrdenenc){
+                   EncOrden.setStatus("C");
+               }
+           }else{
+                for(Ordenenc EncOrden : ListOrdenenc){
+                   EncOrden.setStatus("P");
+               }
+           }
+                     
+           msg+=" **Requisicion Recibida";
+           
+       }catch(Exception ex){
+           ex.printStackTrace();
        }   
        return msg;
    }

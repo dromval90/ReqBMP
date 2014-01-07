@@ -11,7 +11,7 @@
     
     <h:form id="DetordenListForm">
         <h:panelGroup id="display">
-        <p:panel header="#{myBundle.ListDetordenSurtidoTitle}">
+        <p:panel header="#{myBundle.ListDetordenRecibirTitle}">
                 <div style="margin: 0 auto; text-align: center;">
                     <p:panelGrid columns="4" style="margin: 0 auto;">
                            <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
@@ -27,11 +27,11 @@
                          rows="10"
                          rowsPerPageTemplate="10,20,30"
                           editable="true" editMode="cell">
-                
-                <p:ajax event="cellEdit" listener="#{detordenController.onCellEdit}" update="datalist , :growl" />  
                
-                <p:ajax event="rowSelect"   update="btnsurtir"/>
-                <p:ajax event="rowUnselect" update="btnsurtir"/>
+               <p:ajax event="cellEdit" listener="#{detordenController.onCellEditRecibido}" update="datalist , :growl" /> 
+                
+                <p:ajax event="rowSelect"   update="btnrecibir"/>
+                <p:ajax event="rowUnselect" update="btnrecibir"/>
                 
                 <p:column sortBy="#{item.ordenenc.ordenencPK.numOrden}" filterBy="#{item.ordenenc.ordenencPK.numOrden}">
                     <f:facet name="header">
@@ -61,34 +61,47 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="#{myBundle.ListDetordenTitle_cantidad}"/>
+                        <h:outputText value="#{myBundle.ListDetordenTitle_cantidadSolicitada}"/>
                     </f:facet>
                     <h:outputText value="#{item.cantidad}"/>
                 </p:column>
-               <p:column headerText="Fecha Surtido" style="width:8%">  
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.CreateDetordenTitle_cantidadsurtida}"/>
+                    </f:facet>
+                   <h:outputText  value="#{item.cantSurtida}" />
+                </p:column>
+                
+                
+              <p:column headerText="Fecha Recibido" style="width:8%">  
                     <p:cellEditor>  
                         <f:facet name="output">
-                             <h:outputText  value="#{item.fechaSurtido}" >
+                            <h:outputText  value="#{item.fecharecibido}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                              </h:outputText>
                         </f:facet>  
                         <f:facet name="input">
-                            <p:inputText  value="#{item.fechaSurtido}" style="width:96%" label="Fecha Surtido" required="true" requiredMessage="#{myBundle.RequiredMessage_fechasurtido}">
+                            <p:inputText  value="#{item.fecharecibido}" style="width:96%" label="Fecha Recibido" required="true" requiredMessage="#{myBundle.RequiredMessage_fecharecibido}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </p:inputText>
                         </f:facet>  
                     </p:cellEditor>  
                 </p:column>  
-                <p:column headerText="Cantidad Surtir" style="width:8%">  
+                
+                <p:column headerText="Cantidad Recibido" style="width:8%">  
                     <p:cellEditor>  
                         <f:facet name="output">
-                             <h:outputText  value="#{item.cantSurtida}" />
+                             <h:outputText  value="#{item.cantidadRec}" >
+                             </h:outputText>
                         </f:facet>  
                         <f:facet name="input">
-                            <p:inputText  value="#{item.cantSurtida}" style="width:96%" label="Cantidad Surtir" required="true" requiredMessage="#{myBundle.RequiredMessage_cantidadsurtido}"></p:inputText>
+                            <p:inputText  value="#{item.cantidadRec}" style="width:96%" label="Cantidad Recibido" required="true" requiredMessage="#{myBundle.RequiredMessage_cantidadrecibido}">
+                            </p:inputText>
                         </f:facet>  
                     </p:cellEditor>  
-                </p:column> 
+                </p:column>  
+           
+                
                 <p:column sortBy="#{item.unidades.descripcion}" filterBy="#{item.unidades.descripcion}">
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListDetordenTitle_codigoUnidad}"/>
@@ -97,7 +110,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
-                        <p:commandButton id="btnsurtir"   icon="ui-icon ui-icon-cart" actionListener="#{detordenController.surtir}" value="#{myBundle.btnsurtir}"   disabled="#{empty detordenController.selected}" update=":growl"/>
+                        <p:commandButton id="btnrecibir"   icon="ui-icon ui-icon-suitcase" actionListener="#{detordenController.recibir}" value="#{myBundle.btnrecibir}"   disabled="#{empty detordenController.selected}" update=":growl"/>
                     </div>
                 </f:facet>
 

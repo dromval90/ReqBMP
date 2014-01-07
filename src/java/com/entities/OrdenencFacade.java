@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -48,6 +49,19 @@ public class OrdenencFacade extends AbstractFacade<Ordenenc> {
             
          return q.getResultList();
     }
+    
+    public String findPk(){
+        String val="";
+        LoginBean lb= new LoginBean();
+        short codCia = lb.sscia();
+
+        Query q =  em.createNativeQuery("Select ltrim (to_char (max (to_number (num_orden)) + 1)) from OrdenEnc where cod_Cia = ? ");
+                q.setParameter(1, codCia);  
+                val = (String) q.getSingleResult();
+               
+       return val;
+
+    } 
     
     public List<Ordenenc> findDocAutorizados(){
          TypedQuery<Ordenenc> q=null;

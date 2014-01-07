@@ -142,13 +142,33 @@ public class DetordenController extends AbstractController<Detorden> implements 
          }
     }  
      
+   public void onCellEditRecibido(CellEditEvent event){
+       String msg="";
+       Date hoy = new Date();
+       try{
+           if(this.getSelected().getCantidadRec()!= null){
+                 this.getSelected().setFecharecibido(hoy);
+            }else{
+                this.getSelected().setCantidadRec(null);
+                msg ="La Cantidad Recibida es Nula";
+                JsfUtil.addErrorMessage(msg);
+            }
+       }catch(Exception ex){
+           ex.printStackTrace();
+       }
+   }
+     
      public void surtir(){
        String msg="";
        msg = sB_RequisicionBMP.surtirRequisicion(this.getListDetorden());
        JsfUtil.addSuccessMessage(msg);
      }
     
-    
+    public void recibir(){
+       String msg="";
+       msg = sB_RequisicionBMP.recibirRequisicion(this.getListDetorden());
+       JsfUtil.addSuccessMessage(msg);
+    }
     
     
     

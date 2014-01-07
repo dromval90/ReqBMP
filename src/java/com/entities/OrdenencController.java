@@ -43,7 +43,8 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     private ProductosFacade productosFacade;
     @EJB
     private OrdenencFacade ejbFacade;
-    
+    @EJB
+    private OrdenencFacade ordenencFacade;
     
     
     
@@ -72,6 +73,9 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             LoginBean lb= new LoginBean();	
             short codCia = lb.sscia();
             Empleados emp = new Empleados();
+            //String numOrden="";
+            //numOrden = ordenencFacade.findPk();
+            //this.getSelected().getOrdenencPK().setNumOrden(numOrden);
             emp = empleadosFacade.findbyUsuario(lb.ssuser());	    
             this.getSelected().setEmpleados(emp);
             this.getSelected().setCodEmp(emp.getEmpleadosPK().getCodEmp());
@@ -91,7 +95,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.getSelected().setStatus("D");
             this.getSelected().setVia("L");
             this.getSelected().setUsuario(lb.ssuser());
-            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK("49170",codCia));
+            this.getSelected().setOrdenencPK(new com.entities.OrdenencPK(null,codCia));
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -167,7 +171,14 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     public void setListOrdenenc(List<Ordenenc> listOrdenenc) {
         this.listOrdenenc = listOrdenenc;
     }
-       
+
+    public OrdenencFacade getOrdenencFacade() {
+        return ordenencFacade;
+    }
+
+    public void setOrdenencFacade(OrdenencFacade ordenencFacade) {
+        this.ordenencFacade = ordenencFacade;
+    }   
     
 
     public List<Productos> getCatxProd() {
@@ -230,6 +241,9 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     
     public void saveNewRequisicion(){
         String msg ="";
+        String numOrden="";
+        numOrden = ordenencFacade.findPk();
+        this.getSelected().getOrdenencPK().setNumOrden(numOrden);
         this.getSelected().setCodCat(this.getSelected().getCategorias().getCategoriasPK().getCodCat());
         msg = sB_RequisicionBMP.insertarRequisicion(this.getSelected(), this.getDetorden());
         JsfUtil.addSuccessMessage(msg);

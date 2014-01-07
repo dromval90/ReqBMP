@@ -14,7 +14,7 @@
                             <div>
                                 <p:commandButton id="createButton" icon="ui-icon-document"   value="#{myBundle.CreateEncabezado}" actionListener="#{ordenencController.prepareCreate}" update="@form" process="@this"/>
                                 <p:commandButton id="adddetallereq" icon="ui-icon-plus" actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.SaveDetalle}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg,:growl"/> 
-                                <p:commandButton id="SaveNew" icon="ui-icon ui-icon-disk" actionListener="#{ordenencController.saveNewRequisicion}" value="#{myBundle.SaveAll}"  update=":growl"/> 
+                                <p:commandButton id="SaveNew" icon="ui-icon ui-icon-disk" actionListener="#{ordenencController.saveNewRequisicion}" value="#{myBundle.SaveAll}"  update="OrdenencCreateForm, :growl"/> 
                             </div>
                         </f:facet>     
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_ordenencPK_numOrden}" for="ordenencPK_numOrden" />
