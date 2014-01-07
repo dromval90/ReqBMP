@@ -60,7 +60,8 @@ public class SB_RequisicionBMP {
        String msg ="";
        try{
            ordenencFacade.edit(EncOrden);
-       
+           //ordenencFacade.flush();
+           
            msg="**Encabezado Requisicion Almacenado Correctamente";
            for(Detorden DetReq : DetalleReq){
                 DetReq.setValorreq(DetReq.getCantidad().multiply(DetReq.getPreciouni()));
@@ -70,7 +71,7 @@ public class SB_RequisicionBMP {
             }
            msg+=" **Detalle Requisicion Almacenado Correctamente";
            msg+=this.insertarParaAutorizacion(EncOrden);
-           
+          //ordenencFacade.refresh(EncOrden);
        }catch(Exception ex){
            msg="Ocurrior Un Error, No pudo completarse el Ingreso de la Requisicion:" + EncOrden.getOrdenencPK().getNumOrden();
        }   
@@ -215,23 +216,28 @@ public class SB_RequisicionBMP {
                 codCia = DetReq.getDetordenPK().getCodCia();
                 numOrden = DetReq.getDetordenPK().getNumOrden();
                 canRecibida =   DetReq.getCantidadRec().doubleValue();
-                canSolicitada = DetReq.getCalidad();
+                canSolicitada = DetReq.getCantidad().doubleValue();
                 detordenFacade.edit(DetReq);
             }
            ListOrdenenc = ordenencFacade.findDocAutorizados(codCia, numOrden);
            if(canRecibida == canSolicitada){
                for(Ordenenc EncOrden : ListOrdenenc){
                    EncOrden.setStatus("C");
+                   ordenencFacade.edit(EncOrden);
                }
            }else{
                 for(Ordenenc EncOrden : ListOrdenenc){
                    EncOrden.setStatus("P");
+                   ordenencFacade.edit(EncOrden);
                }
            }
+           
+           
                      
            msg+=" **Requisicion Recibida";
            
        }catch(Exception ex){
+           msg+=" **No se ha Podido Procesar la Peticion de Recepcion";
            ex.printStackTrace();
        }   
        return msg;

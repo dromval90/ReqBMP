@@ -165,6 +165,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
 
     public List<Ordenenc> getListOrdenenc() {
         this.setListOrdenenc(ejbFacade.findDocAutorizados());
+        ejbFacade.flush();
         return listOrdenenc;
     }
 
@@ -218,6 +219,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             this.DetalleRequisicion.getDetordenPK().setCodProd(this.DetalleRequisicion.getProductos().getProductosPK().getCodProd());
             this.DetalleRequisicion.setOrdenenc(this.getSelected()); 
             this.DetalleRequisicion.setNombre(this.DetalleRequisicion.getProductos().getNombre());
+            this.DetalleRequisicion.setCodigoUnidad(this.DetalleRequisicion.getUnidades().getCodigoUnidad());
             this.DetalleRequisicion.setPreciouni(this.DetalleRequisicion.getProductos().getCosto());
             this.DetalleRequisicion.setFecharequerido(this.getSelected().getFechaOrden());
             this.DetalleRequisicion.setRecibido("G");

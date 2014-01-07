@@ -68,4 +68,8 @@ public abstract class AbstractFacade<T> {
        
     }
     
+     public void refresh(T entity) {  
+        getEntityManager().refresh(entity);
+    }
+    
 }

@@ -54,6 +54,8 @@ public class Detorden implements Serializable {
     @Size(max = 200)
     @Column(name = "NOMBRE")
     private String nombre;
+    @Column(name = "CODIGO_UNIDAD")
+    private Short codigoUnidad;
     @JoinColumns({
         @JoinColumn(name = "CODIGO_UNIDAD", referencedColumnName = "CODIGO_UNIDAD", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
@@ -228,6 +230,14 @@ public class Detorden implements Serializable {
 
     public void setOrdenenc(Ordenenc ordenenc) {
         this.ordenenc = ordenenc;
+    }
+    
+    public Short getCodigoUnidad() {
+        return codigoUnidad;
+    }
+
+    public void setCodigoUnidad(Short codigoUnidad) {
+        this.codigoUnidad = codigoUnidad;
     }
 
     @Override

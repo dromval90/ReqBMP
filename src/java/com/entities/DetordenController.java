@@ -107,7 +107,17 @@ public class DetordenController extends AbstractController<Detorden> implements 
                 if(this.ListOrdenenc.size() > 0){
                     this.setListDetorden(ejbFacade.findNumOrden(codCia, numOrden));
                 }else{
-                     msg = "La Requisicion No." + numOrden + " No ha sido autorizada, ó Esta Anulada";
+                     this.ListOrdenenc = ordenencFacade.findByNumOrden(codCia, numOrden);
+                     for(Ordenenc Oenc : this.ListOrdenenc){
+                         if(Oenc.getStatus().equals("A")){
+                             msg = "La Requisicion No." + numOrden + " Esta Anulada";
+                         }else if(Oenc.getStatus().equals("C")){
+                             msg = "La Requisicion No." + numOrden + " ha sido Completada";
+                         }else if(Oenc.getAutorizado()== null && Oenc.getFechautorizado() == null){
+                             msg = "La Requisicion No." + numOrden + " no ha sido Autorizada";
+                         }
+                     }
+                     
                      JsfUtil.addErrorMessage(msg);
                }
             }
