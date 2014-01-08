@@ -20,7 +20,14 @@ public class EmailBean {
     @Resource(name = "mail/mmixco")
     private Session mailSession;
 
-
+    
+    /**
+    *sendMessage
+    * Proceso de Negocio que permite el envie de email, para notificar a los usurios
+    * de algun proceso
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void sendMessage(String email, String subject, String bodyMessage) throws MessagingException {
 
         Message message = new MimeMessage(mailSession);

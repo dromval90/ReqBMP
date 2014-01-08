@@ -66,6 +66,14 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.detorden = new ArrayList<Detorden>();
     }
 
+    /**
+    *initializeEmbeddableKey 
+    * Inicializa el Encabezado de la Requisicion de Materia Prima
+    * Siempre se inicializaran los datos del solicitante, en base a los datos de su sesion
+    * Los Campos Inicializados manualmente, son segun la inicializacion de las Requisiciones de Papeleria
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     @Override
     protected void initializeEmbeddableKey() {  
         
@@ -73,9 +81,6 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             LoginBean lb= new LoginBean();	
             short codCia = lb.sscia();
             Empleados emp = new Empleados();
-            //String numOrden="";
-            //numOrden = ordenencFacade.findPk();
-            //this.getSelected().getOrdenencPK().setNumOrden(numOrden);
             emp = empleadosFacade.findbyUsuario(lb.ssuser());	    
             this.getSelected().setEmpleados(emp);
             this.getSelected().setCodEmp(emp.getEmpleadosPK().getCodEmp());
@@ -164,8 +169,7 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     }
 
     public List<Ordenenc> getListOrdenenc() {
-        this.setListOrdenenc(ejbFacade.findDocAutorizados());
-        ejbFacade.flush();
+        this.listOrdenenc = ejbFacade.findDocAutorizados();
         return listOrdenenc;
     }
 
@@ -181,7 +185,13 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.ordenencFacade = ordenencFacade;
     }   
     
-
+    
+     /**
+    *List<Productos>
+    * Se Recuperan los Productos Correspondiente a la Categoria Seleccionada
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public List<Productos> getCatxProd() {
         try{
             String varcodcat= this.getSelected().getCategorias().getCategoriasPK().getCodCat();
@@ -197,6 +207,12 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         this.CatxProd = CatxProd;
     }
     
+    /**
+    *prepareCreate2
+    * Se Inicializa el detalle de la Requisicion, para cada producto que se quiera agregar
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public Detorden prepareCreate2(ActionEvent event) {
         Detorden newItem;
         try {           
@@ -212,7 +228,14 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         }
         return null;
     }    
+  
     
+     /**
+    *addDetalleRequisicion
+    * Se agrega al objeto lista this.DetalleRequisicion, el detalle de la requisicion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void addDetalleRequisicion(){
         
        try{
@@ -232,6 +255,12 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
        
     }
     
+     /**
+    *deleteDetalleRequisicion
+    * Se Elimina del objeto lista this.DetalleRequisicion, el detalle de la requisicion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void deleteDetalleRequisicion(Detorden SelectDetOrden){
         try{
            this.getDetorden().remove(SelectDetOrden);
@@ -241,6 +270,13 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         }
     }
     
+     /**
+    *saveNewRequisicion
+    * Se Procesa la informacion almacenada en los objetos getSelected(), this.getDetorden()
+    * para realizar la persistencia
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void saveNewRequisicion(){
         String msg ="";
         String numOrden="";
@@ -251,12 +287,25 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         JsfUtil.addSuccessMessage(msg);
     }
     
+    
+     /**
+    *AnularReq
+    * Se Procesa la informacion para la anulacion de una Requisicion de Materia Prima
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void AnularReq(){
         String msg="";
         msg = sB_RequisicionBMP.AnularRequisicion(this.getSelected());
         JsfUtil.addSuccessMessage( msg);
     }
     
+     /**
+    *imprimirRequisicion
+    * Procesa la Peticion de Impresion de Una Requisicion, luego de su autorizacion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public String imprimirRequisicion() throws NamingException, SQLException, JRException, IOException{
         //try{
             HashMap params = new HashMap();  

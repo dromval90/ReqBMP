@@ -95,7 +95,14 @@ public class DetordenController extends AbstractController<Detorden> implements 
     }
     
     
-    
+     /**
+    *BuscarRequesicion
+    * Se realiza la Busqueda de una Requisicion Autorizada,
+    * si la Requisicion no ha sido autorizada, o su estado es anulado, o
+    * ya fue completada, este metodo lo notifica
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void BuscarRequesicion(){
         String msg="";
         try{
@@ -127,6 +134,13 @@ public class DetordenController extends AbstractController<Detorden> implements 
        
     }
     
+     /**
+    *onCellEdit
+    * Permite Verificar en el Surtido de las Requisiciones, que los valores ingresados no sean mayores
+    * a los solicitado, y devolviendo la fecha en que se realiza el surtido
+    * @author       Daniel Romero
+    * @version      1.0
+    */
      public void onCellEdit(CellEditEvent event) {        
          String msg="";
          Date hoy = new Date();
@@ -152,6 +166,14 @@ public class DetordenController extends AbstractController<Detorden> implements 
          }
     }  
      
+    /**
+    *onCellEditRecibido
+    * Permite verificar en la recepcion de Materia Prima que la cantidad recibida no sea nula
+    * y actualiza la fecha en que se realiza el recibo de la materia prima
+    * @author       Daniel Romero
+    * @version      1.0
+    */
+     
    public void onCellEditRecibido(CellEditEvent event){
        String msg="";
        Date hoy = new Date();
@@ -168,12 +190,27 @@ public class DetordenController extends AbstractController<Detorden> implements 
        }
    }
      
+    
+    /**
+    *surtir
+    * Permite Procesar la Informacion cargada en el objeto this.getListDetorden(), para realizar
+    * la persistencia
+    * @author       Daniel Romero
+    * @version      1.0
+    */
      public void surtir(){
        String msg="";
        msg = sB_RequisicionBMP.surtirRequisicion(this.getListDetorden());
        JsfUtil.addSuccessMessage(msg);
      }
     
+      /**
+    *recibir
+    * Permite Procesar la Informacion cargada en el objeto this.getListDetorden(), para realizar
+    * la persistencia
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void recibir(){
        String msg="";
        msg = sB_RequisicionBMP.recibirRequisicion(this.getListDetorden());

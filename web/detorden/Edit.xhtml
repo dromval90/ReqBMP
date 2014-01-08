@@ -63,7 +63,7 @@
                         <h:outputLabel value="#{myBundle.EditDetordenLabel_ordenenc}" for="ordenenc" />
                         <h:outputText id="ordenenc" value="#{detordenController.selected.ordenenc}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{detordenController.save}" value="#{myBundle.Save}" update="display,:DetordenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenEditDialog);"/>
+                    <p:commandButton actionListener="#{detordenController.save}" value="#{myBundle.Save}" update="display,:OrdenencCreateForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenEditDialog);"/>
                     <p:commandButton value="#{myBundle.Cancel}" onclick="DetordenEditDialog.hide()"/>
                 </h:panelGroup>
 

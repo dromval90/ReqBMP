@@ -17,12 +17,18 @@
 
                          <p:outputLabel value="#{myBundle.CreateDetordenLabel_detordenPK_codProd}" for="detordenPK_codProd" />
                                                
-                        <p:selectOneMenu filter="true" id="detordenPK_codProd" value="#{ordenencController.detalleRequisicion.productos}" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_codProd}">
+                         <p:selectOneMenu filter="true"  id="detordenPK_codProd" var="prod"  value="#{ordenencController.detalleRequisicion.productos}" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_codProd}" filterMatchMode="startsWith">
                             <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
                             <f:selectItems value="#{ordenencController.catxProd}"
                                            var="productosItem"                                        
                                            itemValue="#{productosItem}"
-                                           itemLabel="#{productosItem.productosPK.codProd} || #{productosItem.nombre}"/>
+                                           itemLabel="#{productosItem.productosPK.codProd} || #{productosItem.nombre} "/>
+                            <p:column filterBy="#{prod.productosPK.codProd}" sortBy="{prod.productosPK.codProd}">  
+                                #{prod.productosPK.codProd}
+                            </p:column>  
+                            <p:column filterBy="#{prod.nombre} #{prod.nombre}">  
+                                #{prod.nombre} 
+                            </p:column>  
                             <f:converter binding="#{productosConverter}"/>
                         </p:selectOneMenu>
                             
@@ -40,7 +46,7 @@
                         <p:inputText id="cantidad" value="#{ordenencController.detalleRequisicion.cantidad}" title="#{myBundle.CreateDetordenTitle_cantidad}" required="true" requiredMessage="#{myBundle.CreatecantidadRequieredMessage}"/>
 
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ordenencController.addDetalleRequisicion}" value="#{myBundle.Save}" update="display,:DetordenListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenCreateDialog);" process="@form"/>
+                    <p:commandButton actionListener="#{ordenencController.addDetalleRequisicion}" value="#{myBundle.Save}" update="display,:OrdenencCreateForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DetordenCreateDialog);" process="@form"/>
                     <p:commandButton value="#{myBundle.Cancel}" onclick="DetordenCreateDialog.hide()"/>
                 </h:panelGroup>
 

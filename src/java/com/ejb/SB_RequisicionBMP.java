@@ -54,13 +54,19 @@ public class SB_RequisicionBMP {
     
     
    
-     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+   /**
+    *insertarRequisicion
+    * Proceso de Negocio que permite realizar la persistencia, para almacenar 
+    * la Requision de Materia Prima, y invocando al metodo que permite la persistencia
+    * para ingresarlo en documentos a autorizar
+    * @author       Daniel Romero
+    * @version      1.0
+    */
    public String insertarRequisicion(Ordenenc EncOrden, List<Detorden> DetalleReq){
        String msg ="";
        try{
            ordenencFacade.edit(EncOrden);
-           //ordenencFacade.flush();
+          
            
            msg="**Encabezado Requisicion Almacenado Correctamente";
            for(Detorden DetReq : DetalleReq){
@@ -71,12 +77,20 @@ public class SB_RequisicionBMP {
             }
            msg+=" **Detalle Requisicion Almacenado Correctamente";
            msg+=this.insertarParaAutorizacion(EncOrden);
-          //ordenencFacade.refresh(EncOrden);
+     
        }catch(Exception ex){
            msg="Ocurrior Un Error, No pudo completarse el Ingreso de la Requisicion:" + EncOrden.getOrdenencPK().getNumOrden();
        }   
        return msg;
    }
+   
+    /**
+    *insertarParaAutorizacion
+    * Proceso de Negocio que permite realizar la persistencia, para almacenar 
+    * la Requision de Materia Prima, en las tabla de Documento para su autorizacion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
    
     public String insertarParaAutorizacion(Ordenenc EncOrden){
         String msg ="";
@@ -103,6 +117,14 @@ public class SB_RequisicionBMP {
         return msg;
         
     }
+    
+     /**
+    *NotificarEncargadoDepto
+    * Proceso de Negocio que permite realizar la Notificacion al encargado del
+    * Departamento para la autorizacion de la Requisicion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     
     public String NotificarEncargadoDepto(short codDepto, String codTipoDocto, String NumDoc) throws MessagingException{
         String msg=""; 
@@ -142,6 +164,13 @@ public class SB_RequisicionBMP {
             msg+=" **Se ha Notificado a Encargado de Departamento de Requisicion ";
             return msg;
     }
+    
+     /**
+    *AnularRequisicion
+    * Proceso de Negocio que permite la Persistencia para la anulacion de la Requisicion
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     
     public String AnularRequisicion(Ordenenc EncOrden){
         String msg="";
@@ -187,6 +216,14 @@ public class SB_RequisicionBMP {
         return msg;
     }
     
+     /**
+    *surtirRequisicion
+    * Proceso de Negocio que permite realizar la persistencia para el Surtido de La Requisicion en la 
+    * Bodega de Materia Prima
+    * @author       Daniel Romero
+    * @version      1.0
+    */
+    
      public String surtirRequisicion(List<Detorden> DetalleReq){
        String msg ="";
        try{
@@ -198,10 +235,18 @@ public class SB_RequisicionBMP {
            msg+=" **Requisicion Surtida";
            
        }catch(Exception ex){
-           
+           msg+=" **Ocurrio un error, No se pudo completar el Surtido de la Requisicion";
        }   
        return msg;
    }
+     
+      /**
+    *recibirRequisicion
+    * Proceso de Negocio que permite realizar la persistencia para la Recepcion de la materia prima
+    * por los departamento que la solicitaron
+    * @author       Daniel Romero
+    * @version      1.0
+    */
      
     public String recibirRequisicion(List<Detorden> DetalleReq){
        String msg ="";
