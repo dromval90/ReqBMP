@@ -14,17 +14,37 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2">
-
-                        <p:outputLabel value="#{myBundle.CreateTemplateRmpLabel_templateRmpPK_codCia}" for="templateRmpPK_codCia" />
-                        <p:inputText id="templateRmpPK_codCia" value="#{templateRmpController.selected.templateRmpPK.codCia}" title="#{myBundle.CreateTemplateRmpTitle_templateRmpPK_codCia}" required="true" requiredMessage="#{myBundle.CreateTemplateRmpRequiredMessage_templateRmpPK_codCia}"/>
-
-                        <p:outputLabel value="#{myBundle.CreateTemplateRmpLabel_templateRmpPK_codProd}" for="templateRmpPK_codProd" />
-                        <p:inputText id="templateRmpPK_codProd" value="#{templateRmpController.selected.templateRmpPK.codProd}" title="#{myBundle.CreateTemplateRmpTitle_templateRmpPK_codProd}" required="true" requiredMessage="#{myBundle.CreateTemplateRmpRequiredMessage_templateRmpPK_codProd}" size="15" maxlength="15"/>
-
+                        <p:outputLabel value="#{myBundle.CreateDetordenLabel_detordenPK_codProd}" for="detordenPK_codProd" />
+                        <p:selectOneMenu filter="true"  id="detordenPK_codProd" var="prod"  value="#{templateRmpController.selected.productos}" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_codProd}" filterMatchMode="startsWith">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{templateRmpController.catxProd}"
+                                           var="productosItem"                                        
+                                           itemValue="#{productosItem}"
+                                           itemLabel="#{productosItem.productosPK.codProd} || #{productosItem.nombre} "/>
+                            <p:column filterBy="#{prod.productosPK.codProd}" sortBy="#{prod.productosPK.codProd}">  
+                                #{prod.productosPK.codProd}
+                            </p:column>  
+                            <p:column filterBy="#{prod.nombre} #{prod.nombre}">  
+                                #{prod.nombre} 
+                            </p:column>  
+                            <f:converter binding="#{productosConverter}"/>
+                        </p:selectOneMenu>
+                      
                         <p:outputLabel value="#{myBundle.CreateTemplateRmpLabel_nombreProdTemplate}" for="nombreProdTemplate" />
-                        <p:inputText id="nombreProdTemplate" value="#{templateRmpController.selected.nombreProdTemplate}" title="#{myBundle.CreateTemplateRmpTitle_nombreProdTemplate}" size="200" maxlength="200"/>
+                        <p:inputText id="nombreProdTemplate" value="#{templateRmpController.selected.nombreProdTemplate}" title="#{myBundle.CreateTemplateRmpTitle_nombreProdTemplate}" size="75" maxlength="200" required="true" requiredMessage="#{myBundle.CreateDetordenRequiredMessage_detordenPK_nombreprodplantilla}"/>
+                        
+                         <p:outputLabel value="#{myBundle.CreateDetordenLabel_codigoUnidad}" for="codigoUnidad" />
+                         <p:selectOneMenu filter="true" id="codigoUnidad" value="#{templateRmpController.selected.unidades}" required="true" requiredMessage="#{myBundle.CreateunidadesRequieredMessage}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unidadesController.items}"
+                                           var="unidadesItem"                                        
+                                           itemValue="#{unidadesItem}"
+                                           itemLabel="#{unidadesItem.descripcion}"/>
+                            <f:converter binding="#{unidadesConverter}"/>
+                        </p:selectOneMenu>
+                    
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{templateRmpController.saveNew}" value="#{myBundle.Save}" update="display,:TemplateRmpListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TemplateRmpCreateDialog);"/>
+                    <p:commandButton actionListener="#{templateRmpController.saveTemplateRmp}" value="#{myBundle.Save}" update="display,:TemplateRmpListForm:datalist,:growl"  oncomplete="handleSubmit(xhr,status,args,TemplateRmpCreateDialog);" process="@all"/>
                     <p:commandButton value="#{myBundle.Cancel}" onclick="TemplateRmpCreateDialog.hide()"/>
                 </h:panelGroup>
 
@@ -35,3 +55,4 @@
     </ui:composition>
 
 </html>
+

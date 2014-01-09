@@ -15,14 +15,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{templateRmpController.selected != null}">
 
-                        <h:outputText value="#{myBundle.ViewTemplateRmpLabel_templateRmpPK_codCia}"/>
-                        <h:outputText value="#{templateRmpController.selected.templateRmpPK.codCia}" title="#{myBundle.ViewTemplateRmpTitle_templateRmpPK_codCia}"/>
-
                         <h:outputText value="#{myBundle.ViewTemplateRmpLabel_templateRmpPK_codProd}"/>
-                        <h:outputText value="#{templateRmpController.selected.templateRmpPK.codProd}" title="#{myBundle.ViewTemplateRmpTitle_templateRmpPK_codProd}"/>
+                        <h:outputText value="#{templateRmpController.selected.productos.nombre}" title="#{myBundle.ViewTemplateRmpTitle_templateRmpPK_codProd}"/>
 
                         <h:outputText value="#{myBundle.ViewTemplateRmpLabel_nombreProdTemplate}"/>
                         <h:outputText value="#{templateRmpController.selected.nombreProdTemplate}" title="#{myBundle.ViewTemplateRmpTitle_nombreProdTemplate}"/>
+
+                        <h:outputText value="#{myBundle.ViewTemplateRmpLabel_codigoUnidad}"/>
+                        <h:outputText value="#{templateRmpController.selected.unidades.descripcion}" title="#{myBundle.ViewTemplateRmpTitle_codigoUnidad}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{myBundle.Close}" onclick="TemplateRmpViewDialog.hide()"/>
                 </h:panelGroup>

@@ -96,6 +96,7 @@
                <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="adddetallereq" icon="ui-icon-plus" actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.SaveDetalle}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg, :growl" disabled="#{empty ordenencController.selected}"/>
+                        <p:commandButton id="addtemplate" icon="ui-icon ui-icon-extlink" actionListener="#{ordenencController.cargarPlantilla}" value="#{myBundle.LoadTemplate}"   update="datalist, :growl" disabled="#{empty ordenencController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{ordenencController.deleteDetalleRequisicion(item)}" update=":growl,datalist" disabled="#{empty ordenencController.detorden}"/>
                         <p:commandButton id="SaveNew" icon="ui-icon ui-icon-disk" actionListener="#{ordenencController.saveNewRequisicion}" value="#{myBundle.SaveAll}"  update="@form, :growl" disabled="#{empty ordenencController.detorden}" onclick="statusDialog.show()"  oncomplete="statusDialog.hide()" /> 
                         

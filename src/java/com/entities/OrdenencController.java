@@ -319,5 +319,9 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
         return "";
     }
     
+    public void cargarPlantilla(){
+        
+    }
+    
     
 }
