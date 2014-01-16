@@ -24,11 +24,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.naming.NamingException;
 import net.sf.jasperreports.engine.JRException;
+import org.primefaces.event.CellEditEvent;
 
 @ManagedBean(name = "ordenencController")
 @ViewScoped
 
 public class OrdenencController extends AbstractController<Ordenenc> implements Serializable {
+    @EJB
+    private TemplateRmpFacade templateRmpFacade;
     @EJB
     private SB_Reportes reportes;
     @EJB
@@ -49,11 +52,13 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     
     
     
+    
     List <Productos> CatxProd;
     Detorden DetalleRequisicion;
     List <Detorden> detorden ;
     List <Detorden> listDetorden;
     List<Ordenenc> listOrdenenc;
+    List<TemplateRmp> listTemplateRmp;
   
     
     public OrdenencController() {
@@ -184,7 +189,14 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
     public void setOrdenencFacade(OrdenencFacade ordenencFacade) {
         this.ordenencFacade = ordenencFacade;
     }   
-    
+
+    public TemplateRmpFacade getTemplateRmpFacade() {
+        return templateRmpFacade;
+    }
+
+    public void setTemplateRmpFacade(TemplateRmpFacade templateRmpFacade) {
+        this.templateRmpFacade = templateRmpFacade;
+    }
     
      /**
     *List<Productos>
@@ -317,11 +329,44 @@ public class OrdenencController extends AbstractController<Ordenenc> implements 
             ex.printStackTrace();
         }    */
         return "";
-    }
+    }  
     
+     /**
+    *cargarPlantilla
+    * Se Procesa la Informacion Cargada en la Lista de Plantilla de Producto, hacia la
+    * Lista de Solicitud de Productos
+    * @author       Daniel Romero
+    * @version      1.0
+    */
     public void cargarPlantilla(){
-        
+        try{
+            listTemplateRmp = this.templateRmpFacade.findAll();
+            for(TemplateRmp template : listTemplateRmp){
+            this.prepareCreate2(null);
+            this.DetalleRequisicion.getDetordenPK().setCodProd(template.getTemplateRmpPK().getCodProd());
+            this.DetalleRequisicion.setOrdenenc(this.getSelected()); 
+            this.DetalleRequisicion.setUnidades(template.getUnidades());
+            this.DetalleRequisicion.setProductos(template.getProductos());
+            this.DetalleRequisicion.setCantidad(template.getCantidad());
+            
+            this.DetalleRequisicion.setCodigoUnidad(template.getUnidades().getCodigoUnidad());
+            this.DetalleRequisicion.setPreciouni(template.getProductos().getCosto());
+            this.DetalleRequisicion.setFecharequerido(this.getSelected().getFechaOrden());
+            this.DetalleRequisicion.setRecibido("G");
+            this.getDetorden().add(this.DetalleRequisicion);
+        }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
-    
+    /**
+    *onCellEdit
+    * Se Procesa la Informacion para al editar las cantidades en las lista de Solicitud de Materiales
+    * @author       Daniel Romero
+    * @version      1.0
+    */
+     public void onCellEdit(CellEditEvent event) {        
+        
+    }  
 }

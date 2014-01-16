@@ -42,6 +42,9 @@
                                            itemLabel="#{unidadesItem.descripcion}"/>
                             <f:converter binding="#{unidadesConverter}"/>
                         </p:selectOneMenu>
+                         
+                        <p:outputLabel value="#{myBundle.CreateTemplateRmpLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{templateRmpController.selected.cantidad}" title="#{myBundle.CreateTemplateRmpTitle_cantidad}"/>
                     
                     </p:panelGrid>
                     <p:commandButton actionListener="#{templateRmpController.saveTemplateRmp}" value="#{myBundle.Save}" update="display,:TemplateRmpListForm:datalist,:growl"  oncomplete="handleSubmit(xhr,status,args,TemplateRmpCreateDialog);" process="@all"/>

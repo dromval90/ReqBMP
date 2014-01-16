@@ -40,7 +40,7 @@
 
                         <p:outputLabel value="#{myBundle.CreateOrdenencLabel_codCat}" for="codCat" />                       
                         <p:selectOneMenu filter="true" id="codCat" value="#{ordenencController.selected.categorias}" required="true" requiredMessage="#{myBundle.CreatecategoriaRequieredMessage}">
-                            <f:selectItem itemValue="61" itemLabel="BOLSAS"/>
+                            
                             <f:selectItems value="#{categoriasController.items}"
                                            var="categoriasItem"                                        
                                            itemValue="#{categoriasItem}"
@@ -69,8 +69,9 @@
                          rowKey="#{item.detordenPK}"
                          paginator="true"
                          rows="10"
-                         rowsPerPageTemplate="10,20,30"
-                         >
+                         rowsPerPageTemplate="10,20,30" editable="true" editMode="cell">
+                
+                <p:ajax event="cellEdit" listener="#{ordenencController.onCellEdit}" update="datalist , :growl" />  
                 <p:ajax event="rowSelect"   update="deleteButton"/>
                 <p:ajax event="rowUnselect" update="deleteButton"/>
 
@@ -89,16 +90,24 @@
                 <p:column headerText="#{myBundle.ListDetordenTitle_codigoUnidad}">
                     <h:outputText value="#{item.unidades.descripcion}"/>
                 </p:column>
+                
+                <p:column headerText="Cantidad" style="width:8%">  
+                    <p:cellEditor>  
+                        <f:facet name="output">
+                            <h:outputText  value="#{item.cantidad}" />
+                        </f:facet>  
+                        <f:facet name="input">
+                            <p:inputText  value="#{item.cantidad}" style="width:96%" label="Cantidad" required="true" requiredMessage="#{myBundle.CreatecantidadRequieredMessage}"/>
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
 
-                <p:column headerText="#{myBundle.ListDetordenTitle_cantidad}">
-                    <h:outputText value="#{item.cantidad}"/>
-                </p:column>
                <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="adddetallereq" icon="ui-icon-plus" actionListener="#{ordenencController.prepareCreate2}" value="#{myBundle.SaveDetalle}"  oncomplete="DetordenCreateDialog.show()" update=":DetordenCreateDlg, :growl" disabled="#{empty ordenencController.selected}"/>
                         <p:commandButton id="addtemplate" icon="ui-icon ui-icon-extlink" actionListener="#{ordenencController.cargarPlantilla}" value="#{myBundle.LoadTemplate}"   update="datalist, :growl" disabled="#{empty ordenencController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{ordenencController.deleteDetalleRequisicion(item)}" update=":growl,datalist" disabled="#{empty ordenencController.detorden}"/>
-                        <p:commandButton id="SaveNew" icon="ui-icon ui-icon-disk" actionListener="#{ordenencController.saveNewRequisicion}" value="#{myBundle.SaveAll}"  update="@form, :growl" disabled="#{empty ordenencController.detorden}" onclick="statusDialog.show()"  oncomplete="statusDialog.hide()" /> 
+                        <p:commandButton id="SaveNew" icon="ui-icon ui-icon-disk" actionListener="#{ordenencController.saveNewRequisicion}" value="#{myBundle.SaveAll}"  update="@form, :growl" disabled="#{empty ordenencController.detorden or ordenencController.selected.ordenencPK.numOrden != null}" onclick="statusDialog.show()"  oncomplete="statusDialog.hide()" /> 
                         
                     </div>
                 </f:facet>
@@ -112,8 +121,7 @@
                          rowKey="#{itemtemplate.templateRmpPK}"
                          paginator="true"
                          rows="10"
-                         rowsPerPageTemplate="10,20,30"
-                         >
+                         rowsPerPageTemplate="10,20,30">
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="#{myBundle.ListTemplateRmpTitle_templateRmpPK_codProd}"/>
@@ -131,6 +139,12 @@
                         <h:outputText value="#{myBundle.ListDetordenTitle_codigoUnidad}"/>
                     </f:facet>
                     <h:outputText value="#{itemtemplate.unidades.descripcion}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{itemtemplate.cantidad}"/>
                 </p:column>
 
             </p:dataTable>

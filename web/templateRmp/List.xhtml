@@ -47,6 +47,12 @@
                     </f:facet>
                     <h:outputText value="#{item.unidades.descripcion}"/>
                 </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListTemplateRmpTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
                 <f:facet name="footer">
                     <div class="footer-section">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{templateRmpController.prepareCreate}" update=":TemplateRmpCreateForm" oncomplete="TemplateRmpCreateDialog.show()"/>

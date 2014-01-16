@@ -5,6 +5,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -40,7 +41,7 @@ public class TemplateRmp implements Serializable {
     @Column(name = "CODIGO_UNIDAD")
     private Short codigoUnidad;
     
-     @JoinColumns({
+    @JoinColumns({
         @JoinColumn(name = "CODIGO_UNIDAD", referencedColumnName = "CODIGO_UNIDAD", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
      private Unidades unidades;
@@ -50,6 +51,9 @@ public class TemplateRmp implements Serializable {
         @JoinColumn(name = "COD_PROD", referencedColumnName = "COD_PROD", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
      private Productos productos;
+    
+    @Column(name = "CANTIDAD")
+    private BigDecimal cantidad;
 
     public TemplateRmp() {
     }
@@ -102,7 +106,14 @@ public class TemplateRmp implements Serializable {
     public void setProductos(Productos productos) {
         this.productos = productos;
     }
-    
+
+    public BigDecimal getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(BigDecimal cantidad) {
+        this.cantidad = cantidad;
+    }
 
     @Override
     public int hashCode() {
